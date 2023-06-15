@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col class="text-center">
-      <img width="250" height="300" src="/Emmaus.png" alt="Vuetify.js" class="mb-5">
+      <img width="250" height="300" src="/emmaus.png" alt="Vuetify.js" class="mb-5">
       <v-card-title class="text-h7 text-md-h5 text-lg-h5">Registro</v-card-title>
 
       <v-form>

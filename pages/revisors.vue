@@ -1,6 +1,6 @@
 <template>
     <v-col class="text-center">
-        <img width="250" height="300" src="/Emmaus.png" alt="Vuetify.js" class="mb-5">
+        <img width="250" height="300" src="/emmaus.png" alt="Vuetify.js" class="mb-5">
 
 
         <v-container>
