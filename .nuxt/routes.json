@@ -1,0 +1,44 @@
+[
+  {
+    "name": "inspire",
+    "path": "/inspire",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/inspire.vue",
+    "chunkName": "pages/inspire"
+  },
+  {
+    "name": "revisor-asing",
+    "path": "/revisor-asing",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisor-asing.vue",
+    "chunkName": "pages/revisor-asing"
+  },
+  {
+    "name": "revisor-register",
+    "path": "/revisor-register",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisor-register.vue",
+    "chunkName": "pages/revisor-register"
+  },
+  {
+    "name": "revisors",
+    "path": "/revisors",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisors.vue",
+    "chunkName": "pages/revisors"
+  },
+  {
+    "name": "students",
+    "path": "/students",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/students.vue",
+    "chunkName": "pages/students"
+  },
+  {
+    "name": "users",
+    "path": "/users",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/users.vue",
+    "chunkName": "pages/users"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
