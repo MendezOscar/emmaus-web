@@ -13,6 +13,13 @@
                                 <v-spacer></v-spacer>
                                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
                                     hide-details></v-text-field>
+                                <v-col cols="auto ml-5">
+                                    <v-btn prepend-icon="mdi-plus" size="x-large" @click="add()">
+                                        <v-icon left>
+                                            mdi-plus
+                                        </v-icon>Agregar
+                                        revisor</v-btn>
+                                </v-col>
                             </v-card-title>
                             <v-data-table :headers="headers" :items="revisors" :search="search">
                                 <template v-slot:item.actions="{ item }">
@@ -40,7 +47,7 @@
                         <v-dialog v-model="dialog" max-width="1600px">
                             <v-card>
                                 <v-card-title>
-                                    <span class="text-h5">Editar estudiante</span>
+                                    <span class="text-h5">Revisor</span>
                                 </v-card-title>
 
                                 <v-card-text>
@@ -144,13 +151,14 @@
 
 <script>
 import { db } from "~/plugins/firebase.js";
-import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 
 export default {
     mounted() {
         this.getStudents();
     },
     data: () => ({
+        saveMode: true,
         dialog: false,
         dialogDelete: false,
         search: '',
@@ -202,11 +210,17 @@ export default {
     }),
     methods: {
         async getStudents() {
+            this.revisors = [];
             const querySnapshot = await getDocs(collection(db, "revisors"));
             querySnapshot.forEach((doc) => {
                 this.revisors.push(doc.data());
             });
         },
+
+        add() {
+            this.dialog = true;
+        },
+
         deleteItem(item) {
             this.revisor = item;
             console.log(item);
@@ -225,10 +239,11 @@ export default {
 
         closeDelete() {
             this.dialogDelete = false;
-            location.reload();
+            this.getStudents();
         },
 
         editItem(item) {
+            this.saveMode = false;
             this.dialog = true;
             this.name = item.name;
             this.location = item.location;
@@ -244,23 +259,54 @@ export default {
         },
 
         async save() {
-            const docRef = doc(db, "revisors", this.dni);
-            await updateDoc(docRef, {
-                name: this.name,
-                location: this.location,
-                email: this.email,
-                phone: this.phone,
-                ocupation: this.ocupation,
-                educationLevel: this.education,
-                civilStatus: this.civilStatus,
-                dateOfBirth: this.date,
-                churchDones: this.churchDones,
-                church: this.church,
-                dni: this.dni,
-            });
-            location.reload();
+            if (this.saveMode) {
+                await setDoc(doc(db, "revisors", this.dni), {
+                    name: this.name,
+                    location: this.location,
+                    email: this.email,
+                    phone: this.phone,
+                    ocupation: this.ocupation,
+                    educationLevel: this.education,
+                    civilStatus: this.civilStatus,
+                    dateOfBirth: this.date,
+                    churchDones: this.churchDones,
+                    church: this.church,
+                    dni: this.dni
+                });
+            }
+            else {
+                const docRef = doc(db, "revisors", this.dni);
+                await updateDoc(docRef, {
+                    name: this.name,
+                    location: this.location,
+                    email: this.email,
+                    phone: this.phone,
+                    ocupation: this.ocupation,
+                    educationLevel: this.education,
+                    civilStatus: this.civilStatus,
+                    dateOfBirth: this.date,
+                    churchDones: this.churchDones,
+                    church: this.church,
+                    dni: this.dni,
+                });
+            }
+            this.clear();
+            this.getStudents();
             this.dialog = false
-        }
+        },
+        clear() {
+            this.name = "";
+            this.location = "";
+            this.email = "";
+            this.phone = "";
+            this.ocupation = "";
+            this.education = "";
+            this.civilStatus = "";
+            this.dateOfBirth = "";
+            this.churchDones = "";
+            this.church = "";
+            this.dni = "";
+        },
     }
 }
 </script>

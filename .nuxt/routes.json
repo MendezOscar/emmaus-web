@@ -1,51 +1,68 @@
 [
   {
+    "name": "course-asing",
+    "path": "/course-asing",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/course-asing.vue",
+    "chunkName": "pages/course-asing"
+  },
+  {
+    "name": "courses",
+    "path": "/courses",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/courses.vue",
+    "chunkName": "pages/courses"
+  },
+  {
     "name": "inspire",
     "path": "/inspire",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/inspire.vue",
-    "chunkName": "pages/inspire",
-    "_name": "_0937edaf"
-  },
-  {
-    "name": "revisor-asing",
-    "path": "/revisor-asing",
-    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisor-asing.vue",
-    "chunkName": "pages/revisor-asing",
-    "_name": "_e8c7dab0"
+    "chunkName": "pages/inspire"
   },
   {
     "name": "revisor-register",
     "path": "/revisor-register",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisor-register.vue",
-    "chunkName": "pages/revisor-register",
-    "_name": "_4ffea21b"
+    "chunkName": "pages/revisor-register"
   },
   {
     "name": "revisors",
     "path": "/revisors",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisors.vue",
-    "chunkName": "pages/revisors",
-    "_name": "_7feb4a3e"
+    "chunkName": "pages/revisors"
+  },
+  {
+    "name": "section",
+    "path": "/section",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/section.vue",
+    "chunkName": "pages/section"
+  },
+  {
+    "name": "section-asing",
+    "path": "/section-asing",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/section-asing.vue",
+    "chunkName": "pages/section-asing"
+  },
+  {
+    "name": "section-details",
+    "path": "/section-details",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/section-details.vue",
+    "chunkName": "pages/section-details"
   },
   {
     "name": "students",
     "path": "/students",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/students.vue",
-    "chunkName": "pages/students",
-    "_name": "_f0d262da"
+    "chunkName": "pages/students"
   },
   {
     "name": "users",
     "path": "/users",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/users.vue",
-    "chunkName": "pages/users",
-    "_name": "_3b6eed1d"
+    "chunkName": "pages/users"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_13f5da32"
+    "chunkName": "pages/index"
   }
 ]

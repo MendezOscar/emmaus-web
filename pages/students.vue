@@ -122,8 +122,8 @@
                                             </v-col>
 
                                             <v-col cols="12" md="4">
-                                                <v-combobox v-model="currentRevisor" :items="revisorsName"
-                                                    label="Revisor"></v-combobox>
+                                                <v-combobox v-model="currentCourse" :items="coursesName"
+                                                    label="Cursos"></v-combobox>
                                             </v-col>
                                         </v-row>
                                     </v-container>
@@ -154,7 +154,7 @@ import { collection, getDocs, doc, deleteDoc, updateDoc, setDoc } from "firebase
 export default {
     mounted() {
         this.getStudents();
-        this.getRevisors();
+        this.getCourse();
     },
     data: () => ({
         changeRevisor: false,
@@ -172,7 +172,7 @@ export default {
             { text: 'Ministerios', value: 'churchDones' },
             { text: 'Direccion', value: 'location' },
             { text: 'Telefono', value: 'phone' },
-            { text: 'Revisor actual', value: 'currentRevisor' },
+            { text: 'Curso Actual', value: 'currentCourse' },
             { text: 'Acciones', value: 'actions', sortable: false },
         ],
         students: [],
@@ -189,7 +189,7 @@ export default {
         churchDones: "",
         church: "",
         dni: "",
-        currentRevisor: "",
+        currentCourse: "",
 
         date: null,
         menu: false,
@@ -207,22 +207,23 @@ export default {
             v => !!v || 'E-mail is required',
             v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
         ],
-        revisorsName: [],
-        revisors: [],
+        coursesName: [],
+        courses: [],
         dniRevisor: ""
     }),
     methods: {
         async getStudents() {
+            this.students = [];
             const querySnapshot = await getDocs(collection(db, "students"));
             querySnapshot.forEach((doc) => {
                 this.students.push(doc.data());
             });
         },
-        async getRevisors() {
-            const querySnapshot = await getDocs(collection(db, "revisors"));
+        async getCourse() {
+            const querySnapshot = await getDocs(collection(db, "courses"));
             querySnapshot.forEach((doc) => {
-                this.revisors.push(doc.data());
-                this.revisorsName.push(doc.data().name);
+                this.courses.push(doc.data());
+                this.coursesName.push(doc.data().name);
             });
         },
         deleteItem(item) {
@@ -241,14 +242,14 @@ export default {
 
         closeDelete() {
             this.dialogDelete = false;
-            location.reload();
+            this.getStudents();
         },
 
         close() {
             this.dialog = false
         },
         editItem(item) {
-            if (item.currentRevisor != this.currentRevisor)
+            if (item.currentCourse != this.currentCourse)
                 this.changeRevisor = true
             this.dialog = true;
             this.name = item.name;
@@ -262,7 +263,7 @@ export default {
             this.churchDones = item.churchDones;
             this.church = item.church;
             this.dni = item.dni;
-            this.currentRevisor = item.currentRevisor;
+            this.currentCourse = item.currentCourse;
         },
 
         async save() {
@@ -279,19 +280,19 @@ export default {
                 churchDones: this.churchDones,
                 church: this.church,
                 dni: this.dni,
-                currentRevisor: this.currentRevisor,
+                currentCourse: this.currentCourse,
             });
 
-            if (this.changeRevisor) {
-                this.dniRevisor = this.revisors.find(x => x.name == this.currentRevisor).dni;
-                await setDoc(doc(db, "revisor-student", this.dni + "-" + this.dniRevisor), {
-                    dniRevisor: this.dniRevisor,
-                    namRevisor: this.currentRevisor,
-                    nameStudent: this.name,
-                    dniStudent: this.dni
-                });
-            }
-            location.reload();
+            // if (this.changeRevisor) {
+            //     this.dniRevisor = this.revisors.find(x => x.name == this.currentRevisor).dni;
+            //     await setDoc(doc(db, "course-student", this.dni + "-" + this.dniRevisor), {
+            //         dniRevisor: this.dniRevisor,
+            //         namRevisor: this.currentRevisor,
+            //         nameStudent: this.name,
+            //         dniStudent: this.dni
+            //     });
+            // }
+            this.getStudents();
             this.dialog = false
         }
     }

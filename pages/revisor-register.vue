@@ -100,6 +100,7 @@ import { doc, setDoc } from "firebase/firestore";
 export default {
     data() {
         return {
+            saveMode: true,
             dialog: false,
             dialogDelete: false,
             snackbar: false,

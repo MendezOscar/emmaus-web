@@ -3,6 +3,7 @@
     <v-navigation-drawer v-model="drawer" :mini-variant="miniVariant" :clipped="clipped" fixed app>
       <v-list v-if=isAdmin>
         <v-list-item v-for="(item, i) in itemsLogged" :key="i" :to="item.to" router exact>
+
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -101,15 +102,27 @@ export default {
           access: "admin"
         },
         {
-          icon: 'mdi-cash-register',
-          title: 'Registro de revisor',
-          to: '/revisor-register',
+          icon: 'mdi-book-open-blank-variant',
+          title: 'Cursos',
+          to: '/courses',
+          access: "admin"
+        },
+        {
+          icon: 'mdi-bookshelf',
+          title: 'Secciones',
+          to: '/section',
           access: "admin"
         },
         {
           icon: 'mdi-account-tag',
-          title: 'Asignar revisor',
-          to: '/revisor-asing',
+          title: 'Asignar secciones',
+          to: '/section-asing',
+          access: "admin"
+        },
+        {
+          icon: 'mdi-account-details',
+          title: 'Detalle de secciones',
+          to: '/section-details',
           access: "admin"
         },
         {
