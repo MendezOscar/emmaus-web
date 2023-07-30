@@ -21,14 +21,29 @@
                                 </v-col>
 
                             </v-card-title>
-                            <v-data-table :headers="headers" :items="courses" :search="search">
+                            <v-data-table :headers="headers" :items="courses" :search="search" show-expand>
                                 <template v-slot:item.actions="{ item }">
-                                    <v-icon small class="mr-2" @click="editItem(item)">
-                                        mdi-pencil
-                                    </v-icon>
-                                    <v-icon small @click="deleteItem(item)">
-                                        mdi-delete
-                                    </v-icon>
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="editItem(item)">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar curso</span>
+                                    </v-tooltip>
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="deleteItem(item)">
+                                                mdi-delete
+                                            </v-icon>
+                                        </template>
+                                        <span>Eliminar curso</span>
+                                    </v-tooltip>
+                                </template>
+                                <template v-slot:expanded-item="{ headers, item }">
+                                    <td :colspan="headers.length" class="justify-description">
+                                        Descripcion del curso : {{ item.description }}
+                                    </td>
                                 </template>
                             </v-data-table>
                         </v-card>
@@ -44,7 +59,7 @@
                             </v-card>
                         </v-dialog>
 
-                        <v-dialog v-model="dialog" max-width="1300px">
+                        <v-dialog v-model="dialog" max-width="1500px">
                             <v-card>
                                 <v-card-title>
                                     <span class="text-h5">Curso</span>
@@ -54,8 +69,13 @@
                                     <v-container>
                                         <v-row>
                                             <v-col cols="6" md="4">
-                                                <v-combobox v-model="level" :items="courseLevel"
-                                                    label="Seleccione el nivel del curso"></v-combobox>
+                                                <v-combobox v-model="module" :items="modules"
+                                                    label="Seleccione el modulo del curso"></v-combobox>
+                                            </v-col>
+
+                                            <v-col cols="12" md="4">
+                                                <v-text-field label="Identificador del curso" v-model="code"
+                                                    required></v-text-field>
                                             </v-col>
 
                                             <v-col cols="12" md="4">
@@ -63,9 +83,18 @@
                                             </v-col>
 
                                             <v-col cols="12" md="4">
+                                                <v-text-field label="Secuencia dentro del modulo" v-model="sequence"
+                                                    required></v-text-field>
+                                            </v-col>
+
+                                            <v-col cols="12" md="4">
                                                 <v-text-field label="Nombre del curso" v-model="name"
                                                     required></v-text-field>
                                             </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-textarea v-model="description" counter label="Description del curso" maxlength="900"
+                                                single-line></v-textarea>
                                         </v-row>
                                     </v-container>
                                 </v-card-text>
@@ -95,6 +124,7 @@ import { collection, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase
 export default {
     mounted() {
         this.Courses();
+        this.getModules();
     },
     data: () => ({
         saveMode: true,
@@ -102,6 +132,7 @@ export default {
         dialogDelete: false,
         search: '',
         course: '',
+        code: '',
         headers: [
             {
                 text: 'Nombre',
@@ -109,27 +140,23 @@ export default {
                 sortable: false,
                 value: 'name',
             },
-            { text: 'Id', value: 'id' },
-            { text: 'Nivel', value: 'level' },
+            { text: 'Modulo', value: 'module' },
+            { text: 'Level', value: 'level' },
+            { text: 'Secuencia', value: 'sequence' },
+            { text: 'Codigo', value: 'code' },
+            { text: 'Descripcion', value: 'data-table-expand' },
             { text: 'Acciones', value: 'actions', sortable: false },
         ],
-
+        description: '',
         name: "",
-        level: "",
+        module: "",
         id: "",
+        level: '',
         courses: [],
+        sequence: '',
 
         modal: false,
-        courseLevel: [
-            'I',
-            'II',
-            'III',
-            'IV',
-            'V',
-            'VI',
-            'VII',
-            'VIII'
-        ],
+        modules: [],
     }),
     methods: {
         async Courses() {
@@ -137,6 +164,13 @@ export default {
             const querySnapshot = await getDocs(collection(db, "courses"));
             querySnapshot.forEach((doc) => {
                 this.courses.push(doc.data());
+            });
+        },
+
+        async getModules() {
+            const querySnapshot = await getDocs(collection(db, "module"));
+            querySnapshot.forEach((doc) => {
+                this.modules.push(doc.data().level + '-' + doc.data().name);
             });
         },
         deleteItem(item) {
@@ -162,8 +196,10 @@ export default {
             this.dialog = true;
             this.saveMode = false;
             this.name = item.name;
-            this.level = item.level;
-            this.id = item.id;
+            this.module = item.level + '-' + item.module;
+            this.code = item.code
+            this.sequence = item.sequence
+            this.description = item.description
         },
 
         add() {
@@ -171,18 +207,28 @@ export default {
         },
 
         async save() {
+            var levelName = this.module.split('-')[0];
+            var moduleName = this.module.split('-')[1];
             if (this.saveMode) {
                 await setDoc(doc(db, "courses", this.id), {
                     name: this.name,
-                    level: this.level,
+                    module: moduleName,
+                    level: levelName,
                     id: this.id,
+                    code: this.code,
+                    sequence: this.sequence,
+                    description: this.description
                 });
             } else {
                 const docRef = doc(db, "courses", this.id);
                 await updateDoc(docRef, {
                     name: this.name,
-                    level: this.level,
+                    module: moduleName,
+                    level: levelName,
                     id: this.id,
+                    code: this.code,
+                    sequence: this.sequence,
+                    description: this.description
                 });
             }
             this.Courses();
@@ -191,3 +237,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.justify-description {
+    text-align: justify;
+}
+</style>

@@ -23,12 +23,25 @@
                             </v-card-title>
                             <v-data-table :headers="headers" :items="revisors" :search="search">
                                 <template v-slot:item.actions="{ item }">
-                                    <v-icon small class="mr-2" @click="editItem(item)">
-                                        mdi-pencil
-                                    </v-icon>
-                                    <v-icon small @click="deleteItem(item)">
-                                        mdi-delete
-                                    </v-icon>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="editItem(item)">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar revisor</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="deleteItem(item)">
+                                                mdi-delete
+                                            </v-icon>
+                                        </template>
+                                        <span>Delete revisor</span>
+                                    </v-tooltip>
+
                                 </template>
                             </v-data-table>
                         </v-card>
@@ -150,7 +163,7 @@
 </template>
 
 <script>
-import { db } from "~/plugins/firebase.js";
+import { auth, db, createUserWithEmailAndPassword } from '@/plugins/firebase'
 import { collection, getDocs, doc, deleteDoc, updateDoc, setDoc } from "firebase/firestore";
 
 export default {
@@ -223,12 +236,10 @@ export default {
 
         deleteItem(item) {
             this.revisor = item;
-            console.log(item);
             this.dialogDelete = true;
         },
 
         async deleteItemConfirm() {
-            console.log(this.studentsId);
             await deleteDoc(doc(db, "revisors", this.revisor.dni));
             this.closeDelete();
         },
@@ -240,6 +251,29 @@ export default {
         closeDelete() {
             this.dialogDelete = false;
             this.getStudents();
+        },
+
+        async createUser() {
+            createUserWithEmailAndPassword(auth, this.email, "emmaus-rev-2022")
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                });
+        },
+        async addUser() {
+            await setDoc(doc(db, "users", this.dni), {
+                displayName: this.name,
+                email: this.email,
+                dni: this.dni,
+                phoneNumber: this.phone,
+                userType: "Revisor"
+            });
         },
 
         editItem(item) {
@@ -273,6 +307,8 @@ export default {
                     church: this.church,
                     dni: this.dni
                 });
+                this.createUser();
+                this.addUser();
             }
             else {
                 const docRef = doc(db, "revisors", this.dni);

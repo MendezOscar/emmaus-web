@@ -23,15 +23,32 @@
                             </v-card-title>
                             <v-data-table :headers="headers" :items="sections" :search="search">
                                 <template v-slot:item.actions="{ item }">
-                                    <v-icon small class="mr-2" @click="editItem(item)">
-                                        mdi-pencil
-                                    </v-icon>
-                                    <v-icon small class="mr-2" @click="deleteItem(item)">
-                                        mdi-delete
-                                    </v-icon>
-                                    <v-icon small @click="closeSection(item)">
-                                        mdi-close
-                                    </v-icon>
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="editItem(item)">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar seccion</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="deleteItem(item)">
+                                                mdi-delete
+                                            </v-icon>
+                                        </template>
+                                        <span>Delete seccion</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="closeSection(item)">
+                                                mdi-close
+                                            </v-icon>
+                                        </template>
+                                        <span>Cerrar seccion</span>
+                                    </v-tooltip>
                                 </template>
                             </v-data-table>
                         </v-card>
@@ -78,7 +95,7 @@
                                             </v-col>
                                             <v-col cols="6" md="4">
                                                 <v-combobox v-model="courseName" :items="coursesName"
-                                                    label="Seleccione el nombre del curso"></v-combobox>
+                                                    label="Seleccione el nombre del curso / nivel / modulo"></v-combobox>
                                             </v-col>
                                             <v-col cols="6" md="4">
                                                 <v-combobox v-model="revisorName" :items="revisorsName"
@@ -132,6 +149,8 @@ export default {
             },
             { text: 'Id', value: 'id' },
             { text: 'Curso', value: 'courseName' },
+            { text: 'Nivel', value: 'level' },
+            { text: 'Modulo', value: 'module' },
             { text: 'Estado', value: 'status' },
             { text: 'Revisor', value: 'revisorName' },
             { text: 'Acciones', value: 'actions', sortable: false },
@@ -148,6 +167,8 @@ export default {
         revisorsName: [],
         revisors: [],
         section: "",
+        level: '',
+        module: '',
 
         modal: false,
     }),
@@ -165,7 +186,7 @@ export default {
             const querySnapshot = await getDocs(collection(db, "courses"));
             querySnapshot.forEach((doc) => {
                 this.courses.push(doc.data());
-                this.coursesName.push(doc.data().name);
+                this.coursesName.push(doc.data().name + '-' + doc.data().level + '-' + doc.data().module);
             });
         },
         async Section() {
@@ -209,7 +230,7 @@ export default {
             this.dialog = true;
             this.saveMode = false;
             this.name = item.name;
-            this.courseName = item.courseName;
+            this.courseName = item.courseName + '-' + item.level + '-' + item.module;
             this.id = item.id;
         },
 
@@ -218,26 +239,34 @@ export default {
         },
 
         async save() {
-            this.courseId = this.courses.find(x => x.name == this.courseName).id;
+            var courseSelected = this.courseName.split('-')[0];
+            var level = this.courseName.split('-')[1];
+            var module = this.courseName.split('-')[2];
+
+            this.courseId = this.courses.find(x => x.name == courseSelected).id;
 
             if (this.saveMode) {
                 await setDoc(doc(db, "sections", this.id), {
                     id: this.id,
                     name: this.name,
-                    courseName: this.courseName,
+                    courseName: courseSelected,
                     courseId: this.courseId,
                     status: this.status,
-                    revisorName: this.revisorName
+                    revisorName: this.revisorName,
+                    level: level,
+                    module: module
                 });
             } else {
                 const docRef = doc(db, "sections", this.id);
                 await updateDoc(docRef, {
                     id: this.id,
                     name: this.name,
-                    courseName: this.courseName,
+                    courseName: courseSelected,
                     courseId: this.courseId,
                     status: this.status,
-                    revisorName: this.revisorName
+                    revisorName: this.revisorName,
+                    level: level,
+                    module: module
                 });
             }
             this.Section();

@@ -95,8 +95,8 @@
 </template>
 
 <script>
-import { db } from "~/plugins/firebase.js";
-import { doc, setDoc } from "firebase/firestore";
+import { auth, db, createUserWithEmailAndPassword } from '@/plugins/firebase'
+import { setDoc, doc } from "firebase/firestore";
 
 
 export default {
@@ -151,10 +151,35 @@ export default {
         churchDones: this.churchDones,
         church: this.church,
         dni: this.dni,
-        currentRevisor: this.currentRevisor
+        currentRevisor: this.currentRevisor,
+        currentCourse: ''
       });
       this.snackbar = true;
+      this.addUser();
+      this.createUser();
       this.clear();
+    },
+    async createUser() {
+      createUserWithEmailAndPassword(auth, this.email, "emmaus-est-2022")
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+    },
+    async addUser() {
+      await setDoc(doc(db, "users", this.dni), {
+        displayName: this.name,
+        email: this.email,
+        dni: this.dni,
+        phoneNumber: this.phone,
+        userType: "Estudiante"
+      });
     },
     clear() {
       this.name = "";

@@ -4,15 +4,18 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _b9cb528e = () => interopDefault(import('../pages/course-asing.vue' /* webpackChunkName: "pages/course-asing" */))
 const _7404ff8d = () => interopDefault(import('../pages/courses.vue' /* webpackChunkName: "pages/courses" */))
 const _0937edaf = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _4ffea21b = () => interopDefault(import('../pages/revisor-register.vue' /* webpackChunkName: "pages/revisor-register" */))
+const _bf6846e0 = () => interopDefault(import('../pages/lessons.vue' /* webpackChunkName: "pages/lessons" */))
+const _792246ce = () => interopDefault(import('../pages/level.vue' /* webpackChunkName: "pages/level" */))
+const _6cd76227 = () => interopDefault(import('../pages/module.vue' /* webpackChunkName: "pages/module" */))
+const _e957e5c6 = () => interopDefault(import('../pages/revisor-view.vue' /* webpackChunkName: "pages/revisor-view" */))
 const _7feb4a3e = () => interopDefault(import('../pages/revisors.vue' /* webpackChunkName: "pages/revisors" */))
 const _cba0078c = () => interopDefault(import('../pages/section.vue' /* webpackChunkName: "pages/section" */))
 const _40d3ab9d = () => interopDefault(import('../pages/section-asing.vue' /* webpackChunkName: "pages/section-asing" */))
 const _addd65a2 = () => interopDefault(import('../pages/section-details.vue' /* webpackChunkName: "pages/section-details" */))
 const _f0d262da = () => interopDefault(import('../pages/students.vue' /* webpackChunkName: "pages/students" */))
+const _3ee6becf = () => interopDefault(import('../pages/students-view.vue' /* webpackChunkName: "pages/students-view" */))
 const _3b6eed1d = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
 const _13f5da32 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -28,10 +31,6 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
-    path: "/course-asing",
-    component: _b9cb528e,
-    name: "course-asing"
-  }, {
     path: "/courses",
     component: _7404ff8d,
     name: "courses"
@@ -40,9 +39,21 @@ export const routerOptions = {
     component: _0937edaf,
     name: "inspire"
   }, {
-    path: "/revisor-register",
-    component: _4ffea21b,
-    name: "revisor-register"
+    path: "/lessons",
+    component: _bf6846e0,
+    name: "lessons"
+  }, {
+    path: "/level",
+    component: _792246ce,
+    name: "level"
+  }, {
+    path: "/module",
+    component: _6cd76227,
+    name: "module"
+  }, {
+    path: "/revisor-view",
+    component: _e957e5c6,
+    name: "revisor-view"
   }, {
     path: "/revisors",
     component: _7feb4a3e,
@@ -63,6 +74,10 @@ export const routerOptions = {
     path: "/students",
     component: _f0d262da,
     name: "students"
+  }, {
+    path: "/students-view",
+    component: _3ee6becf,
+    name: "students-view"
   }, {
     path: "/users",
     component: _3b6eed1d,

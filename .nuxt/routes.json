@@ -1,68 +1,100 @@
 [
   {
-    "name": "course-asing",
-    "path": "/course-asing",
-    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/course-asing.vue",
-    "chunkName": "pages/course-asing"
-  },
-  {
     "name": "courses",
     "path": "/courses",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/courses.vue",
-    "chunkName": "pages/courses"
+    "chunkName": "pages/courses",
+    "_name": "_7404ff8d"
   },
   {
     "name": "inspire",
     "path": "/inspire",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/inspire.vue",
-    "chunkName": "pages/inspire"
+    "chunkName": "pages/inspire",
+    "_name": "_0937edaf"
   },
   {
-    "name": "revisor-register",
-    "path": "/revisor-register",
-    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisor-register.vue",
-    "chunkName": "pages/revisor-register"
+    "name": "lessons",
+    "path": "/lessons",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/lessons.vue",
+    "chunkName": "pages/lessons",
+    "_name": "_bf6846e0"
+  },
+  {
+    "name": "level",
+    "path": "/level",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/level.vue",
+    "chunkName": "pages/level",
+    "_name": "_792246ce"
+  },
+  {
+    "name": "module",
+    "path": "/module",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/module.vue",
+    "chunkName": "pages/module",
+    "_name": "_6cd76227"
+  },
+  {
+    "name": "revisor-view",
+    "path": "/revisor-view",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisor-view.vue",
+    "chunkName": "pages/revisor-view",
+    "_name": "_e957e5c6"
   },
   {
     "name": "revisors",
     "path": "/revisors",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/revisors.vue",
-    "chunkName": "pages/revisors"
+    "chunkName": "pages/revisors",
+    "_name": "_7feb4a3e"
   },
   {
     "name": "section",
     "path": "/section",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/section.vue",
-    "chunkName": "pages/section"
+    "chunkName": "pages/section",
+    "_name": "_cba0078c"
   },
   {
     "name": "section-asing",
     "path": "/section-asing",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/section-asing.vue",
-    "chunkName": "pages/section-asing"
+    "chunkName": "pages/section-asing",
+    "_name": "_40d3ab9d"
   },
   {
     "name": "section-details",
     "path": "/section-details",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/section-details.vue",
-    "chunkName": "pages/section-details"
+    "chunkName": "pages/section-details",
+    "_name": "_addd65a2"
   },
   {
     "name": "students",
     "path": "/students",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/students.vue",
-    "chunkName": "pages/students"
+    "chunkName": "pages/students",
+    "_name": "_f0d262da"
+  },
+  {
+    "name": "students-view",
+    "path": "/students-view",
+    "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/students-view.vue",
+    "chunkName": "pages/students-view",
+    "_name": "_3ee6becf"
   },
   {
     "name": "users",
     "path": "/users",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/users.vue",
-    "chunkName": "pages/users"
+    "chunkName": "pages/users",
+    "_name": "_3b6eed1d"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/home/indimin/Documents/dev/emaus/emaus-web/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_13f5da32"
   }
 ]

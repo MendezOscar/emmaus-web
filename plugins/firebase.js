@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  createUserWithEmailAndPassword
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -31,4 +32,4 @@ const db = initializeFirestore(firebaseApp, {
 });
 const auth = getAuth(firebaseApp);
 
-export { db, auth, signInWithEmailAndPassword, signOut, onAuthStateChanged };
+export { db, auth, signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword };

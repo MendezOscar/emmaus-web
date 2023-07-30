@@ -16,12 +16,25 @@
                             </v-card-title>
                             <v-data-table :headers="headers" :items="students" :search="search">
                                 <template v-slot:item.actions="{ item }">
-                                    <v-icon small class="mr-2" @click="editItem(item)">
-                                        mdi-pencil
-                                    </v-icon>
-                                    <v-icon small @click="deleteItem(item)">
-                                        mdi-delete
-                                    </v-icon>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="editItem(item)">
+                                                mdi-pencil
+                                            </v-icon>
+                                        </template>
+                                        <span>Editar estudiante</span>
+                                    </v-tooltip>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="deleteItem(item)">
+                                                mdi-delete
+                                            </v-icon>
+                                        </template>
+                                        <span>Delete estudiante</span>
+                                    </v-tooltip>
+
                                 </template>
                             </v-data-table>
                         </v-card>

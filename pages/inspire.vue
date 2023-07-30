@@ -42,7 +42,9 @@
 </template>
 
 <script>
-import { auth, signInWithEmailAndPassword } from '@/plugins/firebase'
+import { auth, signInWithEmailAndPassword, db } from '@/plugins/firebase'
+import { collection, getDocs } from "firebase/firestore";
+
 
 export default {
     data: () => ({
@@ -51,19 +53,45 @@ export default {
         snackbar: false,
         text: 'Bienvenido',
         vertical: true,
+        user: [],
+        users: [],
     }),
     methods: {
         login() {
             signInWithEmailAndPassword(auth, this.email, this.password).then((data) => {
                 this.snackbar = true;
-                location.reload();
                 localStorage.setItem("login", "true");
+                localStorage.setItem("user", data.user.email);
+                this.getUsers();
+
                 this.clear();
             })
                 .catch(error => {
                     console.log(error.code)
                     alert(error.message);
                 });
+        },
+
+        async getUsers() {
+            const querySnapshot = await getDocs(collection(db, "users"));
+            querySnapshot.forEach((doc) => {
+                this.users.push(doc.data());
+
+            });
+
+            const userEmail = localStorage.getItem("user");
+
+            this.users.forEach(element => {
+                if (element.email == userEmail) {
+                    this.user.push(element);
+                }
+            });
+            localStorage.setItem("userType", this.user[0].userType);
+            localStorage.setItem("userDni", this.user[0].dni);
+            localStorage.setItem("userName", this.user[0].displayName);
+            location.reload();
+
+
         },
         clear() {
             this.email = "";

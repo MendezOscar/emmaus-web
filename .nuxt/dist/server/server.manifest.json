@@ -1,0 +1,37 @@
+{
+  "entry": "server.js",
+  "files": {
+    "pages/courses.js": "pages/courses.js",
+    "pages/index.js": "pages/index.js",
+    "pages/inspire.js": "pages/inspire.js",
+    "pages/lessons.js": "pages/lessons.js",
+    "pages/level.js": "pages/level.js",
+    "pages/module.js": "pages/module.js",
+    "pages/revisor-view.js": "pages/revisor-view.js",
+    "pages/revisors.js": "pages/revisors.js",
+    "pages/section-asing.js": "pages/section-asing.js",
+    "pages/section-details.js": "pages/section-details.js",
+    "pages/section.js": "pages/section.js",
+    "pages/students-view.js": "pages/students-view.js",
+    "pages/students.js": "pages/students.js",
+    "pages/users.js": "pages/users.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "pages/courses.js": "pages/courses.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "pages/inspire.js": "pages/inspire.js.map",
+    "pages/lessons.js": "pages/lessons.js.map",
+    "pages/level.js": "pages/level.js.map",
+    "pages/module.js": "pages/module.js.map",
+    "pages/revisor-view.js": "pages/revisor-view.js.map",
+    "pages/revisors.js": "pages/revisors.js.map",
+    "pages/section-asing.js": "pages/section-asing.js.map",
+    "pages/section-details.js": "pages/section-details.js.map",
+    "pages/section.js": "pages/section.js.map",
+    "pages/students-view.js": "pages/students-view.js.map",
+    "pages/students.js": "pages/students.js.map",
+    "pages/users.js": "pages/users.js.map",
+    "server.js": "server.js.map"
+  }
+}

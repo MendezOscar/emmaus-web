@@ -25,9 +25,16 @@
                             </v-card-title>
                             <v-data-table :headers="headers" :items="studentsWithOutRevisor" :search="search">
                                 <template v-slot:item.actions="{ item }">
-                                    <v-icon small class="mr-2" @click="asignStudents(item)">
-                                        mdi-plus
-                                    </v-icon>
+
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="asignStudents(item)">
+                                                mdi-plus
+                                            </v-icon>
+                                        </template>
+                                        <span>Agregar estudiante a seccion seleccionada</span>
+                                    </v-tooltip>
+
                                 </template>
                             </v-data-table>
                         </v-card>
@@ -53,9 +60,14 @@
                             </v-card-title>
                             <v-data-table :headers="sectionHeaders" :items="sectionStudentSelected" :search="search">
                                 <template v-slot:item.actions="{ item }">
-                                    <v-icon small class="mr-2" @click="deleteItem(item)">
-                                        mdi-delete
-                                    </v-icon>
+                                    <v-tooltip top>
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-icon dark v-bind="attrs" v-on="on" @click="deleteItem(item)">
+                                                mdi-delete
+                                            </v-icon>
+                                        </template>
+                                        <span>Eliminar estudiante de esta seccion</span>
+                                    </v-tooltip>
                                 </template>
                             </v-data-table>
                         </v-card>
@@ -139,7 +151,9 @@ export default {
 
         studentSection: '',
         sectionStudent: [],
-        sectionStudentSelected: []
+        sectionStudentSelected: [],
+        lessons: [],
+        lessonsToSAve: []
     }),
     methods: {
         async getStudents() {
@@ -163,7 +177,14 @@ export default {
             });
             this.sections.forEach(element => {
                 if (element.status === "En curso")
-                    this.sectionsName.push(element.id + '-' + element.courseName + '-' + element.revisorName);
+                    this.sectionsName.push(element.id + '-' + element.courseName + '-' + element.revisorName + '-' + element.level + "-" + element.module);
+            });
+        },
+
+        async getLesson() {
+            const querySnapshot = await getDocs(collection(db, "lessons"));
+            querySnapshot.forEach((doc) => {
+                this.lessons.push(doc.data());
             });
         },
 
@@ -185,16 +206,41 @@ export default {
         },
         async asignStudents(item) {
             if (this.section != "") {
+
                 var sectionSelected = this.section.split('-');
                 this.sectionId = sectionSelected[0];
                 this.course = sectionSelected[1];
+                var revisor = sectionSelected[2];
+                var level = sectionSelected[3];
+                var module = sectionSelected[4];
+
+                let lessonCourse = this.lessons.filter(x => x.course == this.course);
+
+                lessonCourse.forEach(item => {
+                    var newLesson = {
+                        lessonName: item.name,
+                        lessonNote: 'Aun sin nota',
+                        lessonStatus: 'En curso'
+                    }
+                    this.lessonsToSAve.push(newLesson);
+                })
+
 
                 await setDoc(doc(db, "section-student", item.dni + "-" + this.sectionId), {
                     sectionId: this.sectionId,
                     course: this.course,
                     nameStudent: item.name,
-                    dniStudent: item.dni
+                    dniStudent: item.dni,
+                    revisor: revisor,
+                    level: level,
+                    module: module,
+                    status: "EN CURSO",
+                    lessons: this.lessonsToSAve
                 });
+
+                lessonCourse = [];
+                this.lessonsToSAve = [];
+
                 const docRef = doc(db, "students", item.dni);
                 await updateDoc(docRef, {
                     currentCourse: this.course
@@ -211,6 +257,8 @@ export default {
         viewSection() {
             if (this.section != "") {
                 this.getSectionStudents();
+                this.getLesson();
+
             } else {
                 this.text = "Seleccione primero una seccion"
                 this.snackbar = true;
