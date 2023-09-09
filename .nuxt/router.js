@@ -4,20 +4,22 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _7404ff8d = () => interopDefault(import('../pages/courses.vue' /* webpackChunkName: "pages/courses" */))
-const _0937edaf = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _bf6846e0 = () => interopDefault(import('../pages/lessons.vue' /* webpackChunkName: "pages/lessons" */))
-const _792246ce = () => interopDefault(import('../pages/level.vue' /* webpackChunkName: "pages/level" */))
-const _6cd76227 = () => interopDefault(import('../pages/module.vue' /* webpackChunkName: "pages/module" */))
-const _e957e5c6 = () => interopDefault(import('../pages/revisor-view.vue' /* webpackChunkName: "pages/revisor-view" */))
-const _7feb4a3e = () => interopDefault(import('../pages/revisors.vue' /* webpackChunkName: "pages/revisors" */))
-const _cba0078c = () => interopDefault(import('../pages/section.vue' /* webpackChunkName: "pages/section" */))
-const _40d3ab9d = () => interopDefault(import('../pages/section-asing.vue' /* webpackChunkName: "pages/section-asing" */))
-const _addd65a2 = () => interopDefault(import('../pages/section-details.vue' /* webpackChunkName: "pages/section-details" */))
-const _f0d262da = () => interopDefault(import('../pages/students.vue' /* webpackChunkName: "pages/students" */))
-const _3ee6becf = () => interopDefault(import('../pages/students-view.vue' /* webpackChunkName: "pages/students-view" */))
-const _3b6eed1d = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
-const _13f5da32 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _e751ac06 = () => interopDefault(import('../pages/courses.vue' /* webpackChunkName: "pages/courses" */))
+const _218a181f = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _8ec3f200 = () => interopDefault(import('../pages/lessons.vue' /* webpackChunkName: "pages/lessons" */))
+const _bbae39ee = () => interopDefault(import('../pages/level.vue' /* webpackChunkName: "pages/level" */))
+const _655e29b7 = () => interopDefault(import('../pages/module.vue' /* webpackChunkName: "pages/module" */))
+const _56689558 = () => interopDefault(import('../pages/request.vue' /* webpackChunkName: "pages/request" */))
+const _6f52d362 = () => interopDefault(import('../pages/requests.vue' /* webpackChunkName: "pages/requests" */))
+const _40eae8ad = () => interopDefault(import('../pages/revisor-view.vue' /* webpackChunkName: "pages/revisor-view" */))
+const _71de6dce = () => interopDefault(import('../pages/revisors.vue' /* webpackChunkName: "pages/revisors" */))
+const _9afbb2ac = () => interopDefault(import('../pages/section.vue' /* webpackChunkName: "pages/section" */))
+const _3e18420d = () => interopDefault(import('../pages/section-asing.vue' /* webpackChunkName: "pages/section-asing" */))
+const _678a079f = () => interopDefault(import('../pages/section-details.vue' /* webpackChunkName: "pages/section-details" */))
+const _7989f223 = () => interopDefault(import('../pages/students.vue' /* webpackChunkName: "pages/students" */))
+const _3c2b553f = () => interopDefault(import('../pages/students-view.vue' /* webpackChunkName: "pages/students-view" */))
+const _1a28f38d = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _5681cd52 = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -32,59 +34,67 @@ export const routerOptions = {
 
   routes: [{
     path: "/courses",
-    component: _7404ff8d,
+    component: _e751ac06,
     name: "courses"
   }, {
     path: "/inspire",
-    component: _0937edaf,
+    component: _218a181f,
     name: "inspire"
   }, {
     path: "/lessons",
-    component: _bf6846e0,
+    component: _8ec3f200,
     name: "lessons"
   }, {
     path: "/level",
-    component: _792246ce,
+    component: _bbae39ee,
     name: "level"
   }, {
     path: "/module",
-    component: _6cd76227,
+    component: _655e29b7,
     name: "module"
   }, {
+    path: "/request",
+    component: _56689558,
+    name: "request"
+  }, {
+    path: "/requests",
+    component: _6f52d362,
+    name: "requests"
+  }, {
     path: "/revisor-view",
-    component: _e957e5c6,
+    component: _40eae8ad,
     name: "revisor-view"
   }, {
     path: "/revisors",
-    component: _7feb4a3e,
+    component: _71de6dce,
     name: "revisors"
   }, {
     path: "/section",
-    component: _cba0078c,
+    component: _9afbb2ac,
     name: "section"
   }, {
     path: "/section-asing",
-    component: _40d3ab9d,
+    component: _3e18420d,
     name: "section-asing"
   }, {
     path: "/section-details",
-    component: _addd65a2,
+    component: _678a079f,
     name: "section-details"
   }, {
     path: "/students",
-    component: _f0d262da,
+    component: _7989f223,
     name: "students"
   }, {
     path: "/students-view",
-    component: _3ee6becf,
+    component: _3c2b553f,
     name: "students-view"
   }, {
     path: "/users",
-    component: _3b6eed1d,
+    component: _1a28f38d,
     name: "users"
   }, {
     path: "/",
-    component: _13f5da32,
+    component: _5681cd52,
     name: "index"
   }],
 

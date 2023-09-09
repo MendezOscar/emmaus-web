@@ -110,6 +110,12 @@ export default {
       fixed: false,
       itemsAll: [
         {
+          icon: 'mdi-animation',
+          title: 'Solicitudes',
+          to: '/request',
+          access: "Students"
+        },
+        {
           icon: 'mdi-account-plus',
           title: 'Registro',
           to: '/',
@@ -119,7 +125,7 @@ export default {
           icon: 'mdi-account-key',
           title: 'Ingreso',
           to: '/inspire',
-          access: "admin"
+          access: "all"
         },
       ],
       itemsRevisors: [
@@ -127,7 +133,7 @@ export default {
           icon: 'mdi-book-open-blank-variant',
           title: 'Mis cursos',
           to: '/revisor-view',
-          access: "all"
+          access: "Revisors"
         },
       ],
       itemsStudents: [
@@ -135,7 +141,7 @@ export default {
           icon: 'mdi-book-open-blank-variant',
           title: 'Mis cursos',
           to: '/students-view',
-          access: "all"
+          access: "Students"
         },
       ],
       itemsAdmin: [
@@ -209,6 +215,12 @@ export default {
           icon: 'mdi-account-supervisor-circle',
           title: 'Usuarios',
           to: '/users',
+          access: "admin"
+        },
+        {
+          icon: 'mdi-animation',
+          title: 'Solicitudes',
+          to: '/requests',
           access: "admin"
         },
 

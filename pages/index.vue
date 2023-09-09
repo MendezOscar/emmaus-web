@@ -22,23 +22,11 @@
         </v-container>
         <v-container>
           <v-row>
-            <v-col cols="6" md="2">
+            <v-col cols="12" md="3">
               <v-text-field label="Teléfono (sin guiones)" v-model="phone" required></v-text-field>
             </v-col>
 
-            <v-col cols="6" md="2">
-              <v-text-field label="Profesión u oficio" v-model="ocupation" required></v-text-field>
-            </v-col>
-
-            <v-col cols="6" md="2">
-              <v-combobox v-model="education" :items="educationItems"
-                label="Seleccione su nivel de educación"></v-combobox>
-            </v-col>
-            <v-col cols="6" md="2">
-              <v-combobox v-model="civilStatus" :items="civilStatusItem" label="Seleccione su estado civil"></v-combobox>
-            </v-col>
-
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
                 transition="scale-transition" offset-y min-width="auto">
                 <template v-slot:activator="{ on, attrs }">
@@ -56,26 +44,18 @@
                 </v-date-picker>
               </v-menu>
             </v-col>
-          </v-row>
-        </v-container>
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
             </v-col>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field label="Nombre de asamblea" v-model="church" required></v-text-field>
-            </v-col>
-
-            <v-col cols="12" md="4">
-              <v-text-field label="Ministerios en asamblea" v-model="churchDones" required></v-text-field>
             </v-col>
           </v-row>
         </v-container>
-        <v-btn class="mr-4" @click="register()">
+        <v-btn class="mr-4 mt-10" @click="register()">
           Guardar
         </v-btn>
-        <v-btn @click="clear()">
+        <v-btn class="mt-10" @click="clear()">
           Borrar
         </v-btn>
       </v-form>
@@ -95,9 +75,15 @@
 </template>
 
 <script>
-import { auth, db, createUserWithEmailAndPassword } from '@/plugins/firebase'
-import { setDoc, doc } from "firebase/firestore";
-
+import {
+  auth,
+  db,
+  createUserWithEmailAndPassword
+} from '@/plugins/firebase'
+import {
+  setDoc,
+  doc
+} from "firebase/firestore";
 
 export default {
   data() {
@@ -138,31 +124,39 @@ export default {
     }
   },
   methods: {
+    firestoreAutoId() {
+      const CHARS =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      let autoId = "";
+
+      for (let i = 0; i < 20; i++) {
+        autoId += CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+      }
+      return autoId;
+    },
     async register() {
-      await setDoc(doc(db, "students", this.dni), {
+      var studentId = this.firestoreAutoId();
+      await setDoc(doc(db, "students", studentId), {
         name: this.name,
         location: this.location,
         email: this.email,
         phone: this.phone,
-        ocupation: this.ocupation,
-        educationLevel: this.education,
-        civilStatus: this.civilStatus,
         dateOfBirth: this.date,
-        churchDones: this.churchDones,
         church: this.church,
         dni: this.dni,
-        currentRevisor: this.currentRevisor,
-        currentCourse: ''
+        currentCourse: '',
+        id: studentId
       });
       this.snackbar = true;
-      this.addUser();
+      this.addUser(studentId);
       this.createUser();
       this.clear();
     },
     async createUser() {
       createUserWithEmailAndPassword(auth, this.email, "emmaus-est-2022")
         .then((userCredential) => {
-          // Signed in 
+          // Signed in
           const user = userCredential.user;
           // ...
         })
@@ -172,8 +166,8 @@ export default {
           // ..
         });
     },
-    async addUser() {
-      await setDoc(doc(db, "users", this.dni), {
+    async addUser(studentId) {
+      await setDoc(doc(db, "users", studentId), {
         displayName: this.name,
         email: this.email,
         dni: this.dni,

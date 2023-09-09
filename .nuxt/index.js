@@ -12,8 +12,8 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_f087997e from 'nuxt_plugin_plugin_f087997e' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_plugin_98767f66 from 'nuxt_plugin_plugin_98767f66' // Source: ./vuetify/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_cf4a725e from 'nuxt_plugin_plugin_cf4a725e' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_plugin_9ded5286 from 'nuxt_plugin_plugin_9ded5286' // Source: ./vuetify/plugin.js (mode: 'all')
 import nuxt_plugin_firebase_34d6f55a from 'nuxt_plugin_firebase_34d6f55a' // Source: ../plugins/firebase.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -180,12 +180,12 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_f087997e === 'function') {
-    await nuxt_plugin_plugin_f087997e(app.context, inject)
+  if (typeof nuxt_plugin_plugin_cf4a725e === 'function') {
+    await nuxt_plugin_plugin_cf4a725e(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_plugin_98767f66 === 'function') {
-    await nuxt_plugin_plugin_98767f66(app.context, inject)
+  if (typeof nuxt_plugin_plugin_9ded5286 === 'function') {
+    await nuxt_plugin_plugin_9ded5286(app.context, inject)
   }
 
   if (typeof nuxt_plugin_firebase_34d6f55a === 'function') {
