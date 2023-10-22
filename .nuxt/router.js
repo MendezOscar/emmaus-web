@@ -16,6 +16,7 @@ const _71de6dce = () => interopDefault(import('../pages/revisors.vue' /* webpack
 const _9afbb2ac = () => interopDefault(import('../pages/section.vue' /* webpackChunkName: "pages/section" */))
 const _3e18420d = () => interopDefault(import('../pages/section-asing.vue' /* webpackChunkName: "pages/section-asing" */))
 const _678a079f = () => interopDefault(import('../pages/section-details.vue' /* webpackChunkName: "pages/section-details" */))
+const _20e724ca = () => interopDefault(import('../pages/student-course-view.vue' /* webpackChunkName: "pages/student-course-view" */))
 const _7989f223 = () => interopDefault(import('../pages/students.vue' /* webpackChunkName: "pages/students" */))
 const _3c2b553f = () => interopDefault(import('../pages/students-view.vue' /* webpackChunkName: "pages/students-view" */))
 const _1a28f38d = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
@@ -80,6 +81,10 @@ export const routerOptions = {
     path: "/section-details",
     component: _678a079f,
     name: "section-details"
+  }, {
+    path: "/student-course-view",
+    component: _20e724ca,
+    name: "student-course-view"
   }, {
     path: "/students",
     component: _7989f223,

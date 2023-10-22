@@ -18,6 +18,10 @@
                       mdi-plus
                     </v-icon>Agregar
                     curso</v-btn>
+                  <v-btn prepend-icon="mdi-plus" size="x-large" @click="getAll()">
+                    <v-icon left>
+                      mdi-eye
+                    </v-icon>Ver todos</v-btn>
                 </v-col>
                 <v-file-input id="fileData" label="Agregar desde archivo" @change="uploadFromFile()"></v-file-input>
                 <v-btn class="ml-3" prepend-icon="mdi-plus" size="x-large" @click="saveFromFile()">
@@ -131,9 +135,6 @@ import { collection, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase
 
 export default {
   mounted() {
-    this.Courses();
-    this.getLeves();
-    this.getModules();
   },
   data: () => ({
     saveMode: true,
@@ -173,6 +174,9 @@ export default {
     dataFromFile: []
   }),
   methods: {
+    getAll() {
+      this.Courses();
+    },
     uploadFromFile() {
       const input = document.getElementById("fileData");
       readXlsxFile(input.files[0]).then((rows) => {
@@ -256,6 +260,8 @@ export default {
     },
 
     add() {
+      this.getLeves();
+      this.getModules();
       this.dialog = true;
     },
 

@@ -10,6 +10,11 @@
           <v-icon left>
             mdi-eye
           </v-icon>Mostrar Seccion</v-btn>
+        <!-- <v-btn prepend-icon="mdi-plus" size="x-large" class="ml-5" @click="download()">
+          <v-icon left>
+            mdi-eye
+          </v-icon>Exportar a excel</v-btn> -->
+        <v-file-input id="pdfFile" label="Cargar Diploma  " @change="uploadFromFile()"></v-file-input>
       </v-row>
       <v-row>
         <v-col>
@@ -47,55 +52,36 @@
       </v-row>
 
       <v-row>
-        <v-col></v-col>
+        <v-col>
+        </v-col>
       </v-row>
 
       <v-row style="justify-content: center;">
         <v-col cols="12" sm="12">
           <template>
             <v-card>
-              <v-data-table :headers="headers" :items="sectionStudentSelected" :search="search"
-                :single-expand="singleExpand" show-expand class="elevation-1">
+
+              <v-text-field v-model="search" class="ml-10 mr-10 mb-10" append-icon="mdi-magnify" label="Buscar estudiante"
+                single-line hide-details></v-text-field>
+
+              <v-data-table :headers="headers" :items="sectionStudentSelected" :search="search" class="elevation-1">
                 <template v-slot:item.actions="{ item }">
-                  <v-tooltip top v-if="item.calification != ''">
+                  <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
-                      <v-icon class="ml-2" dark v-bind="attrs" v-on="on">
+                      <v-icon dark v-bind="attrs" v-on="on" @click="addCalification(item)">
+                        mdi-pencil
+                      </v-icon>
+                    </template>
+                    <span>Postear nota</span>
+                  </v-tooltip>
+                  <v-tooltip top v-if="item.calification > 70">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon class="ml-2" dark v-bind="attrs" v-on="on" @click="handleButtonClick(item)">
                         mdi-printer-settings
                       </v-icon>
                     </template>
                     <span>Generar diploma</span>
                   </v-tooltip>
-                </template>
-                <template v-slot:expanded-item="{ item }">
-                  <v-list subheader two-line>
-                    <v-subheader inset>Lecciones</v-subheader>
-                    <v-list-item v-for="lesson in item.lessons" :key="lesson.lessonName" class="justify-list">
-                      <v-list-item-avatar>
-                        <v-icon class="grey lighten-1">
-                          checkbox-marked-circle-auto-outlineS
-                        </v-icon>
-                      </v-list-item-avatar>
-
-                      <v-list-item-content>
-                        <v-list-item-title v-text="lesson.lessonName"></v-list-item-title>
-
-                        <v-list-item-subtitle v-text='lesson.lessonNote'></v-list-item-subtitle>
-                      </v-list-item-content>
-
-                      <v-list-item-action>
-
-                        <v-tooltip top>
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-btn icon>
-                              <v-icon color=" grey lighten-1"
-                                @click="addCalification(item, lesson)">mdi-playlist-edit</v-icon>
-                            </v-btn>
-                          </template>
-                          <span>Asignar nota a leccion</span>
-                        </v-tooltip>
-                      </v-list-item-action>
-                    </v-list-item>
-                  </v-list>
                 </template>
               </v-data-table>
             </v-card>
@@ -136,13 +122,16 @@
 
 <script>
 import { db } from "~/plugins/firebase.js";
-import { collection, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+
 
 export default {
   mounted() {
     this.getSectons();
   },
   data: () => ({
+    pdfUrl: 'https://www.docdroid.net/w0BfCXc/diploma-pdf',
     dialog: false,
     calification: '',
     singleExpand: true,
@@ -152,13 +141,12 @@ export default {
       {
         text: 'Nombre',
         align: 'start',
-        sortable: false,
         value: 'nameStudent',
       },
       { text: 'Seccion', value: 'id' },
       { text: 'Curso', value: 'courseId' },
       { text: 'Estado', value: 'status' },
-      { text: 'Lecciones', value: 'data-table-expand' },
+      { text: 'Nota', value: 'calification' },
       { text: 'Acciones', value: 'actions' },
     ],
     students: [],
@@ -172,6 +160,7 @@ export default {
     sectionId: "",
 
     studentSection: '',
+    courses: [],
     sectionStudent: [],
     sectionStudentSelected: [],
 
@@ -184,9 +173,129 @@ export default {
     module: '',
     lessons: [],
     lessonSelected: '',
-    lessonStatus: ''
+    lessonStatus: '',
+    currentCourse: '',
+    arrayBufferFile: ''
   }),
   methods: {
+
+    async uploadFromFile() {
+      const input = document.getElementById("pdfFile");
+      this.arrayBufferFile = await input.files[0].arrayBuffer().then(res => res);
+    },
+
+    async modifyPdf(item) {
+
+      console.log(item);
+
+      const sectionRef = collection(db, "courses");
+      const qs = query(sectionRef,
+        where("id", "==", item.courseId),
+      );
+
+      const querySnapshot = await getDocs(qs);
+      querySnapshot.forEach((doc) => {
+        this.courses.push(doc.data());
+      });
+
+      console.log(this.courses);
+
+      const pdfDoc = await PDFDocument.load(this.arrayBufferFile);
+      const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
+      const timesRomanFontBold = await pdfDoc.embedFont(StandardFonts.TimesRomanBold)
+
+
+
+
+      // Modify the PDF.
+      const name = item.nameStudent;
+      const firstPage = pdfDoc.getPages()[0];
+      const { height } = firstPage.getSize();
+      const fontSize = 50
+      const textWidth = timesRomanFont.widthOfTextAtSize(name, fontSize);
+
+      firstPage.drawText(name, {
+        x: firstPage.getWidth() / 2 - textWidth / 2,
+        y: height / 2,
+        size: fontSize,
+        font: timesRomanFont,
+        color: rgb(0.03, 0.29, 0.47),
+      });
+
+
+      const course = this.courses[0].course;
+      const fontSizeCourse1 = 30
+      const fontSizeCourse = 20
+      const textWidthCourse = timesRomanFontBold.widthOfTextAtSize(course.toUpperCase(), fontSizeCourse1);
+
+      firstPage.drawText(course.toUpperCase(), {
+        x: firstPage.getWidth() / 2 - textWidthCourse / 2,
+        y: (height / 2) - 80,
+        size: fontSizeCourse1,
+        font: timesRomanFontBold,
+        color: rgb(0.25, 0.67, 0.28),
+      });
+
+
+      const levelName = this.courses[0].levelName;
+      const textWidthLevel = timesRomanFont.widthOfTextAtSize(levelName, fontSizeCourse);
+
+      firstPage.drawText(levelName, {
+        x: firstPage.getWidth() / 2 - textWidthLevel / 2,
+        y: (height / 2) - 130,
+        size: fontSizeCourse,
+        font: timesRomanFont,
+        color: rgb(0.03, 0.29, 0.47),
+      });
+
+      const modelName = "Módulo: " + this.courses[0].moduleName;
+      const textWidthModule = timesRomanFont.widthOfTextAtSize(modelName, fontSizeCourse);
+
+      firstPage.drawText(modelName, {
+        x: firstPage.getWidth() / 2 - textWidthModule / 2,
+        y: (height / 2) - 160,
+        size: fontSizeCourse,
+        font: timesRomanFont,
+        color: rgb(0.03, 0.29, 0.47),
+      });
+
+      const fechaActual = new Date();
+      const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+
+      const date = fechaActual.toLocaleDateString(undefined, opciones) + " | Honduras C.A."
+      const dateSize = timesRomanFont.widthOfTextAtSize(date, fontSizeCourse);
+
+      firstPage.drawText(date, {
+        x: firstPage.getWidth() / 2 - dateSize / 2,
+        y: (height / 2) - 190,
+        size: fontSizeCourse,
+        font: timesRomanFont,
+        color: rgb(0.03, 0.29, 0.47),
+      });
+
+
+
+      // Save the modified PDF to a variable (`pdfBytes`).
+      const pdfBytes = await pdfDoc.save();
+
+      // Now, you can use `pdfBytes` for any additional operations (e.g. downloading the modified PDF).
+      return pdfBytes;
+    },
+    async handleButtonClick(item) {
+      try {
+        const pdfBytes = await this.modifyPdf(item);
+        this.downloadPdf(pdfBytes);
+      } catch (error) {
+        console.error('Error modifying PDF:', error);
+      }
+    },
+    downloadPdf(pdfBytes) {
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'modified_pdf.pdf';
+      link.click();
+    },
     async getSectons() {
       this.sections = [];
       this.sectionsName = [];
@@ -203,17 +312,22 @@ export default {
     async getSectionStudents() {
       this.sectionStudent = [];
       this.sectionStudentSelected = [];
-      const querySnapshot = await getDocs(collection(db, "section-student"));
-      querySnapshot.forEach((doc) => {
-        this.sectionStudent.push(doc.data());
-      });
 
       var sectionSelected = this.section.split('-');
       this.sectionId = sectionSelected[0];
 
       this.revisorName = sectionSelected[1];
-      this.course = this.sectionId.slice(1, 5);
+      this.course = sectionSelected[2];
 
+      const sectionRef = collection(db, "section-student");
+      const qs = query(sectionRef,
+        where("sectionId", "==", this.sectionId),
+      );
+
+      const querySnapshot = await getDocs(qs);
+      querySnapshot.forEach((doc) => {
+        this.sectionStudent.push(doc.data());
+      });
 
       this.sectionStudent.forEach(element => {
         if (element.id.split('-')[1] === this.sectionId)
@@ -224,13 +338,22 @@ export default {
 
     },
 
-    addCalification(item, lesson) {
+    addCalification(item) {
       this.dialog = true;
-      this.dniStudent = item.dniStudent
-      this.sectionId = item.id
-      this.lessonSelected = lesson
+      this.dniStudent = item.idStudent
+      this.sectionId = item.id.split("-")[1]
+    },
 
-      this.lessons.push(item.lessons);
+    download() {
+      if (this.section != "") {
+        const fileName = "seccion";
+        const data = this.sectionStudentSelected;
+        const exportType = exportFromJSON.types.xls;
+        exportFromJSON({ data, fileName, exportType });
+      } else {
+        this.text = "Seleccione primero una seccion"
+        this.snackbar = true;
+      }
     },
 
     async viewSection() {
@@ -244,39 +367,22 @@ export default {
 
     async save() {
       if (this.calification > 69) {
-        this.lessonStatus = "APROBADA"
+        this.status = "APROBADA"
       } else {
-        this.lessonStatus = "REPROBADA"
+        this.status = "REPROBADA"
       }
 
-      console.log(this.lessons);
-
-      this.lessons[0].map((dato) => {
-        if (dato.lessonName === this.lessonSelected.lessonName) {
-          dato.lessonNote = this.calification;
-          dato.lessonStatus = this.lessonStatus;
-        }
-      });
       const docRef = doc(db, "section-student", this.dniStudent + "-" + this.sectionId);
       await updateDoc(docRef, {
-        lessons: this.lessons[0]
+        calification: this.calification,
+        status: this.status,
       });
 
-      var lessonCount = this.lessons[0].length;
-      var lessonAproved = 0;
-      this.lessons[0].forEach((item) => {
-        if (item.lessonStatus == "APROBADA") {
-          lessonAproved++;
-        }
-      })
-
-      if (lessonCount == lessonAproved) {
-        const docRef = doc(db, "section-student", this.dniStudent + "-" + this.sectionId);
-        await updateDoc(docRef, {
-          status: "FINALIZADA"
-        });
-      }
-
+      const docRefStudent = doc(db, "students", this.dniStudent);
+      await updateDoc(docRefStudent, {
+        currentCourse: '',
+      });
+      await this.getSectionStudents();
       this.dialog = false
     },
 

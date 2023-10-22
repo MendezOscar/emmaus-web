@@ -84,6 +84,13 @@
     "_name": "_678a079f"
   },
   {
+    "name": "student-course-view",
+    "path": "/student-course-view",
+    "component": "/home/mendez/dev/emmaus/emmaus-web/pages/student-course-view.vue",
+    "chunkName": "pages/student-course-view",
+    "_name": "_20e724ca"
+  },
+  {
     "name": "students",
     "path": "/students",
     "component": "/home/mendez/dev/emmaus/emmaus-web/pages/students.vue",

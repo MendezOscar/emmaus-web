@@ -162,6 +162,8 @@ export default {
     module: '',
     sectionId: '',
     modal: false,
+    sectionStudents: [],
+    sectionToDelete: []
   }),
   methods: {
     async getRevisors() {
@@ -200,7 +202,30 @@ export default {
 
     async deleteItemConfirm() {
       await deleteDoc(doc(db, "sections", this.section.id));
+      await this.deleteSectionStudent(this.section.id);
       this.closeDelete();
+    },
+
+    async deleteSectionStudent(id) {
+      this.sectionToDelete = [];
+      const querySnapshot = await getDocs(collection(db, "section-student"));
+      querySnapshot.forEach((doc) => {
+        this.sectionStudents.push(doc.data());
+      });
+
+      this.sectionStudents.forEach(element => {
+        if (element.id.split("-")[1] == id)
+          this.sectionToDelete.push(element);
+      });
+
+      this.sectionToDelete.forEach(async element => {
+        await deleteDoc(doc(db, "section-student", element.id));
+        const docRef = doc(db, "students", element.idStudent);
+        await updateDoc(docRef, {
+          currentCourse: "",
+        });
+      });
+
     },
 
     close() {
@@ -226,7 +251,7 @@ export default {
       this.id = item.id;
     },
 
-    onChangeCourseId(){
+    onChangeCourseId() {
       this.name = this.courseId;
     },
 

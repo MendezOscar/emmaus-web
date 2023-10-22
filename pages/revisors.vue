@@ -13,6 +13,10 @@
                 <v-spacer></v-spacer>
                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
                   hide-details></v-text-field>
+                <v-btn prepend-icon="mdi-plus" class="ml-2 mr-2" size="x-large" @click="getAll()">
+                  <v-icon left>
+                    mdi-eye
+                  </v-icon>Ver todos</v-btn>
                 <v-file-input id="fileData" label="Agregar desde archivo" @change="uploadFromFile()"></v-file-input>
                 <v-btn class="ml-3" prepend-icon="mdi-plus" size="x-large" @click="saveFromFile()">
                   <v-icon left>
@@ -143,7 +147,7 @@ import { collection, getDocs, doc, deleteDoc, updateDoc, setDoc } from "firebase
 
 export default {
   mounted() {
-    this.getStudents();
+
   },
   data: () => ({
     saveMode: true,
@@ -186,6 +190,7 @@ export default {
     dataFromFile: []
   }),
   methods: {
+
     firestoreAutoId() {
       const CHARS =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -197,12 +202,14 @@ export default {
       }
       return autoId;
     },
+
     uploadFromFile() {
       const input = document.getElementById("fileData");
       readXlsxFile(input.files[0]).then((rows) => {
         rows.forEach((item) => this.dataFromFile.push(item));
       });
     },
+
     async saveFromFile() {
       if (this.dataFromFile.size != 0) {
         this.dataFromFile.forEach(async (item) => {
@@ -218,18 +225,16 @@ export default {
             currentCourse: '',
             id: studentId
           });
-          this.addUserFromFile(studentId, item[0], item[3], item[6])
-          this.createUserFromFIle(item[3]);
         });
       }
       this.getStudents();
     },
-    async addUserFromFile(studentId, name, email, phone) {
-      console.log(name);
-      console.log(email);
-      console.log(studentId);
-      console.log(phone);
 
+    getAll() {
+      this.getStudents();
+    },
+
+    async addUserFromFile(studentId, name, email, phone) {
       await setDoc(doc(db, "users", studentId), {
         displayName: name,
         email: email,
@@ -320,8 +325,10 @@ export default {
 
     async save() {
       if (this.saveMode) {
-        await setDoc(doc(db, "revisors", this.dni), {
+        var idRev = this.firestoreAutoId()
+        await setDoc(doc(db, "revisors", idRev), {
           name: this.name,
+          id: idRev,
           location: this.location,
           email: this.email,
           phone: this.phone,
@@ -329,8 +336,6 @@ export default {
           church: this.church,
           dni: this.dni
         });
-        this.createUser();
-        this.addUser();
       }
       else {
         const docRef = doc(db, "revisors", this.id);
@@ -348,6 +353,7 @@ export default {
       this.getStudents();
       this.dialog = false
     },
+
     clear() {
       this.name = "";
       this.location = "";

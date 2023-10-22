@@ -200,6 +200,12 @@ export default {
           access: "admin"
         },
         {
+          icon: 'mdi-animation',
+          title: 'Historial de estudiante',
+          to: '/student-course-view',
+          access: "admin"
+        },
+        {
           icon: 'mdi-account-tie-outline',
           title: 'Revisores',
           to: '/revisors',
@@ -223,7 +229,6 @@ export default {
           to: '/requests',
           access: "admin"
         },
-
       ],
       miniVariant: false,
       right: true,

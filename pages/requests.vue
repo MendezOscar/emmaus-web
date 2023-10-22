@@ -154,7 +154,6 @@ import {
 export default {
   mounted() {
     this.getRequest();
-    this.getCourse();
   },
   data: () => ({
     dialog: false,

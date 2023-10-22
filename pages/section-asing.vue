@@ -55,10 +55,10 @@
               <v-card-title>
                 Estudiantes de la seccion
                 <v-spacer></v-spacer>
-                <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
+                <v-text-field v-model="search1" append-icon="mdi-magnify" label="Search" single-line
                   hide-details></v-text-field>
               </v-card-title>
-              <v-data-table :headers="sectionHeaders" :items="sectionStudentSelected" :search="search">
+              <v-data-table :headers="sectionHeaders" :items="sectionStudentSelected" :search="search1">
                 <template v-slot:item.actions="{ item }">
                   <v-tooltip top>
                     <template v-slot:activator="{ on, attrs }">
@@ -101,7 +101,7 @@
 
 <script>
 import { db } from "~/plugins/firebase.js";
-import { collection, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
 
 export default {
   mounted() {
@@ -116,6 +116,7 @@ export default {
     dialog: false,
     dialogDelete: false,
     search: '',
+    search1: '',
     section: '',
     course: '',
     headers: [
@@ -155,21 +156,30 @@ export default {
     sectionStudentSelected: [],
     lessons: [],
     lessonsToSAve: [],
-    lessonCourse: []
+    lessonCourse: [],
+    sectionStudentToNewField: []
   }),
   methods: {
+
     async getStudents() {
       this.students = [];
       this.studentsWithOutRevisor = [];
-      const querySnapshot = await getDocs(collection(db, "students"));
+
+      const studentsRef = collection(db, "students");
+      const q = query(studentsRef,
+        where("currentCourse", "==", ""),
+      );
+
+      const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         this.students.push(doc.data());
       });
       this.students.forEach(element => {
-        if (element.currentCourse == "")
+        if (element.currentCourse == "" || element.currentCourse == null)
           this.studentsWithOutRevisor.push(element);
       });
     },
+
     async getSectons() {
       this.sections = [];
       this.sectionsName = [];
@@ -183,32 +193,23 @@ export default {
       });
     },
 
-    async getLesson() {
-      const querySnapshot = await getDocs(collection(db, "lessons"));
-      querySnapshot.forEach((doc) => {
-        this.lessons.push(doc.data());
-      });
-
-      this.lessons.forEach(item => {
-        if (item.courseId == this.section.slice(0, 4)) {
-          this.lessonCourse.push(item);
-        }
-      });
-    },
-
     getSpecificSecion() {
       this.sections.forEach(element => {
         if (element.id === this.section.split('-')[2])
           this.sectionSelected = element;
       });
-
-      console.log(this.sectionSelected);
     },
 
     async getSectionStudents() {
       this.sectionStudent = [];
       this.sectionStudentSelected = [];
-      const querySnapshot = await getDocs(collection(db, "section-student"));
+
+      const studentsSectionRef = collection(db, "section-student");
+      const qss = query(studentsSectionRef,
+        where("sectionId", "==", this.section.split('-')[2]),
+      );
+
+      const querySnapshot = await getDocs(qss);
       querySnapshot.forEach((doc) => {
         this.sectionStudent.push(doc.data());
       });
@@ -217,20 +218,12 @@ export default {
         if (element.id.split('-')[1] === this.section.split('-')[2])
           this.sectionStudentSelected.push(element);
       });
+
+      console.log(this.sectionStudent.length);
     },
 
     async asignStudents(item) {
       if (this.section != "") {
-
-        this.lessonCourse.forEach(item => {
-          var newLesson = {
-            lessonName: item.lesson,
-            lessonNote: 'Aun sin nota',
-            lessonStatus: 'En curso'
-          }
-          this.lessonsToSAve.push(newLesson);
-        })
-
 
         await setDoc(doc(db, "section-student", item.id + "-" + this.sectionSelected.id), {
           id: item.id + "-" + this.sectionSelected.id,
@@ -239,7 +232,8 @@ export default {
           idStudent: item.id,
           revisorName: this.sectionSelected.revisorName,
           status: "EN CURSO",
-          lessons: this.lessonsToSAve
+          sectionId: this.sectionSelected.id,
+          calification: 0
         });
 
         this.lessonCourse = [];
@@ -257,11 +251,19 @@ export default {
       }
     },
 
+    async deleteItemConfirm() {
+      await deleteDoc(doc(db, "section-student", this.studentSection.idStudent + '-' + this.studentSection.id.split('-')[1]));
+      const docRef = doc(db, "students", this.studentSection.idStudent);
+      await updateDoc(docRef, {
+        currentCourse: ""
+      });
+      this.closeDelete();
+    },
+
     viewSection() {
       if (this.section != "") {
         this.getSpecificSecion();
         this.getSectionStudents();
-        this.getLesson();
 
       } else {
         this.text = "Seleccione primero una seccion"
@@ -272,15 +274,6 @@ export default {
     deleteItem(item) {
       this.dialogDelete = true;
       this.studentSection = item;
-    },
-
-    async deleteItemConfirm() {
-      await deleteDoc(doc(db, "section-student", this.studentSection.idStudent + '-' + this.studentSection.id.split('-')[1]));
-      const docRef = doc(db, "students", this.studentSection.idStudent);
-      await updateDoc(docRef, {
-        currentCourse: ""
-      });
-      this.closeDelete();
     },
 
     closeDelete() {

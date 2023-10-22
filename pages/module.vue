@@ -107,7 +107,6 @@ import { collection, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase
 
 export default {
   mounted() {
-    this.getLeves();
     this.getModules();
   },
   data: () => ({
@@ -197,6 +196,7 @@ export default {
     },
 
     add() {
+      this.getLeves();
       this.dialog = true;
     },
 

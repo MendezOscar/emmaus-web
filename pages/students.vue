@@ -12,11 +12,19 @@
                 <v-spacer></v-spacer>
                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
                   hide-details></v-text-field>
+                <v-btn prepend-icon="mdi-plus" class="ml-2 mr-2" size="x-large" @click="getAll()">
+                  <v-icon left>
+                    mdi-eye
+                  </v-icon>Ver todos</v-btn>
                 <v-file-input id="fileData" label="Agregar desde archivo" @change="uploadFromFile()"></v-file-input>
                 <v-btn class="ml-3" prepend-icon="mdi-plus" size="x-large" @click="saveFromFile()">
                   <v-icon left>
                     mdi-plus
                   </v-icon>Procesar Archivo</v-btn>
+                <v-btn prepend-icon="mdi-plus" size="x-large" class="ml-5" @click="download()">
+                  <v-icon left>
+                    mdi-eye
+                  </v-icon>Exportar a excel</v-btn>
               </v-card-title>
               <v-data-table :headers="headers" :items="students" :search="search">
                 <template v-slot:item.actions="{ item }">
@@ -63,15 +71,18 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col cols="12" md="4">
+                      <v-col cols="12" md="3">
+                        <v-text-field label="Codigo" v-model="code" required></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="3">
                         <v-text-field label="Nombre completo" v-model="name" required></v-text-field>
                       </v-col>
 
-                      <v-col cols="12" md="4">
+                      <v-col cols="12" md="3">
                         <v-text-field label="Dirección" v-model="location" required></v-text-field>
                       </v-col>
 
-                      <v-col cols="12" md="4">
+                      <v-col cols="12" md="3">
                         <v-text-field label="Correo" v-model="email" :rules="emailRules" required></v-text-field>
                       </v-col>
                     </v-row>
@@ -142,6 +153,7 @@ import {
   db,
   createUserWithEmailAndPassword
 } from "~/plugins/firebase.js";
+import exportFromJSON from "export-from-json";
 import readXlsxFile from "read-excel-file";
 
 import {
@@ -155,8 +167,6 @@ import {
 
 export default {
   mounted() {
-    this.getStudents();
-    this.getCourse();
   },
   data: () => ({
     changeRevisor: false,
@@ -168,6 +178,10 @@ export default {
       align: 'start',
       sortable: false,
       value: 'name',
+    },
+    {
+      text: 'Codigo',
+      value: 'code'
     },
     {
       text: 'Asamblea',
@@ -207,7 +221,7 @@ export default {
     church: "",
     dni: "",
     currentCourse: "",
-
+    code: '',
     date: null,
     menu: false,
     educationItems: [
@@ -227,10 +241,25 @@ export default {
     coursesName: [],
     courses: [],
     dniRevisor: "",
-    dataFromFile: []
+    dataFromFile: [],
+    dataToExport: []
 
   }),
   methods: {
+    download() {
+      if (this.studentCode != "") {
+        const fileName = "students";
+        this.students.forEach((item) => this.dataToExport.push({ name: item.name, phone: `+504${item.phone}` }));
+
+        const data = this.dataToExport;
+
+        const exportType = exportFromJSON.types.csv;
+        exportFromJSON({ data, fileName, exportType });
+      } else {
+        this.text = "Seleccione un estudiante primero"
+        this.snackbar = true;
+      }
+    },
     firestoreAutoId() {
       const CHARS =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -242,35 +271,41 @@ export default {
       }
       return autoId;
     },
+
     uploadFromFile() {
       const input = document.getElementById("fileData");
       readXlsxFile(input.files[0]).then((rows) => {
         rows.forEach((item) => this.dataFromFile.push(item));
       });
     },
+
     async saveFromFile() {
       if (this.dataFromFile.size != 0) {
         this.dataFromFile.forEach(async (item) => {
           var studentId = this.firestoreAutoId();
           await setDoc(doc(db, "students", studentId), {
-            name: item[0],
-            dni: item[1],
-            location: item[2],
-            email: item[3],
-            dateOfBirth: item[4],
-            church: item[5],
-            phone: item[6],
+            code: item[0],
+            name: item[1],
+            dni: item[2],
+            location: item[3],
+            email: item[4],
+            dateOfBirth: item[5],
+            church: item[6],
+            phone: item[7],
             currentCourse: '',
             id: studentId
           });
-          this.addUser(studentId, item[0], item[3], item[6])
-          this.createUser(item[3]);
         });
       }
       this.getStudents();
     },
-    async createUser(email) {
-      createUserWithEmailAndPassword(auth, email, "emmaus-est-2022")
+
+    getAll() {
+      this.getStudents();
+    },
+
+    async createUser(email, code) {
+      createUserWithEmailAndPassword(auth, email, code)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -282,6 +317,7 @@ export default {
           // ..
         });
     },
+
     async addUser(studentId, name, email, phone) {
       await setDoc(doc(db, "users", studentId), {
         displayName: name,
@@ -290,6 +326,7 @@ export default {
         userType: "Estudiante"
       });
     },
+
     async getStudents() {
       this.students = [];
       const querySnapshot = await getDocs(collection(db, "students"));
@@ -297,6 +334,7 @@ export default {
         this.students.push(doc.data());
       });
     },
+
     async getCourse() {
       const querySnapshot = await getDocs(collection(db, "courses"));
       querySnapshot.forEach((doc) => {
@@ -304,13 +342,14 @@ export default {
         this.coursesName.push(doc.data().name);
       });
     },
+
     deleteItem(item) {
-      this.studentsId = item;
+      this.studentsId = item.id;
       this.dialogDelete = true;
     },
 
     async deleteItemConfirm() {
-      await deleteDoc(doc(db, "students", this.id));
+      await deleteDoc(doc(db, "students", this.studentsId));
       this.closeDelete();
     },
 
@@ -322,8 +361,11 @@ export default {
       this.dialogDelete = false;
       this.getStudents();
     },
+
     editItem(item) {
+      this.getCourse();
       this.dialog = true;
+      this.code = item.code;
       this.name = item.name;
       this.location = item.location;
       this.email = item.email;
@@ -346,6 +388,7 @@ export default {
         church: this.church,
         dni: this.dni,
         currentCourse: this.currentCourse,
+        code: this.code
       });
 
       this.getStudents();
