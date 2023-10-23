@@ -5,8 +5,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
+
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCNgdrSkwWKACjKBqYMoJeVjmIdEQBk9Jo",
@@ -31,5 +33,14 @@ const db = initializeFirestore(firebaseApp, {
   experimentalForceLongPolling: true,
 });
 const auth = getAuth(firebaseApp);
+const storage = getStorage(firebaseApp);
 
-export { db, auth, signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword };
+export {
+  db,
+  auth,
+  storage,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+};

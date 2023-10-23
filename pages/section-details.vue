@@ -121,9 +121,10 @@
 
 
 <script>
-import { db } from "~/plugins/firebase.js";
+import { db, storage } from "~/plugins/firebase.js";
+import { ref, uploadBytes } from "firebase/storage"
 import { collection, query, where, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
-import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 
 export default {
@@ -175,9 +176,55 @@ export default {
     lessonSelected: '',
     lessonStatus: '',
     currentCourse: '',
-    arrayBufferFile: ''
+    arrayBufferFile: '',
+    certificates: []
   }),
   methods: {
+
+    firestoreAutoId() {
+      const CHARS =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      let autoId = "";
+
+      for (let i = 0; i < 20; i++) {
+        autoId += CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+      }
+      return autoId;
+    },
+
+    async saveCertificateReference(item, name) {
+
+      const sectionRef = collection(db, "certificates");
+      const qs = query(sectionRef,
+        where("nameCertificare", "==", `${item.idStudent}_${item.courseId}`),
+      );
+
+      const querySnapshot = await getDocs(qs);
+      querySnapshot.forEach((doc) => {
+        this.certificates.push(doc.data());
+        console.log(this.certificates);
+      });
+
+      if (this.certificates.length == 0) {
+        var idCert = this.firestoreAutoId()
+        await setDoc(doc(db, "certificates", idCert), {
+          studentId: item.idStudent,
+          pathBase: "https://firebasestorage.googleapis.com/v0/b/emaus-db.appspot.com/o/",
+          nameCertificare: name,
+          id: idCert,
+        });
+      }
+
+    },
+
+    upload(file, name, item) {
+      const storageRef = ref(storage, `/${name}.pdf`);
+      uploadBytes(storageRef, file).then(async (snapshot) => {
+        console.log(snapshot);
+        await this.saveCertificateReference(item, name);
+      })
+    },
 
     async uploadFromFile() {
       const input = document.getElementById("pdfFile");
@@ -186,7 +233,7 @@ export default {
 
     async modifyPdf(item) {
 
-      console.log(item);
+      this.courses = [];
 
       const sectionRef = collection(db, "courses");
       const qs = query(sectionRef,
@@ -198,13 +245,9 @@ export default {
         this.courses.push(doc.data());
       });
 
-      console.log(this.courses);
-
       const pdfDoc = await PDFDocument.load(this.arrayBufferFile);
-      const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman)
-      const timesRomanFontBold = await pdfDoc.embedFont(StandardFonts.TimesRomanBold)
-
-
+      const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+      const timesRomanFontBold = await pdfDoc.embedFont(StandardFonts.TimesRomanBold);
 
 
       // Modify the PDF.
@@ -284,16 +327,17 @@ export default {
     async handleButtonClick(item) {
       try {
         const pdfBytes = await this.modifyPdf(item);
-        this.downloadPdf(pdfBytes);
+        this.downloadPdf(pdfBytes, item);
       } catch (error) {
         console.error('Error modifying PDF:', error);
       }
     },
-    downloadPdf(pdfBytes) {
+    downloadPdf(pdfBytes, item) {
       const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      this.upload(blob, `${item.idStudent}_${item.courseId}`, item);
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'modified_pdf.pdf';
+      link.download = 'diploma.pdf';
       link.click();
     },
     async getSectons() {

@@ -9,11 +9,13 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
     "axios": "^1.5.1",
     "core-js": "^3.25.3",
     "cors": "^2.8.5",
     "export-from-json": "^1.7.3",
     "firebase": "^9.22.2",
+    "fs": "^0.0.1-security",
     "node-fetch": "2",
     "nuxt": "^2.15.8",
     "pdf-lib": "^1.17.1",
