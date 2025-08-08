@@ -36,6 +36,12 @@
     "chunkName": "pages/module"
   },
   {
+    "name": "report-students",
+    "path": "/report-students",
+    "component": "/Users/mendez/dev/emmaus-web/pages/report-students.vue",
+    "chunkName": "pages/report-students"
+  },
+  {
     "name": "request",
     "path": "/request",
     "component": "/Users/mendez/dev/emmaus-web/pages/request.vue",

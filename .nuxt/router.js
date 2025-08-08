@@ -10,6 +10,7 @@ const _00f4cd82 = () => interopDefault(import('../pages/inspire.vue' /* webpackC
 const _d2ccefc0 = () => interopDefault(import('../pages/lessons.vue' /* webpackChunkName: "pages/lessons" */))
 const _b55ba7ae = () => interopDefault(import('../pages/level.vue' /* webpackChunkName: "pages/level" */))
 const _7143f6d2 = () => interopDefault(import('../pages/module.vue' /* webpackChunkName: "pages/module" */))
+const _23bf23f6 = () => interopDefault(import('../pages/report-students.vue' /* webpackChunkName: "pages/report-students" */))
 const _9a719318 = () => interopDefault(import('../pages/request.vue' /* webpackChunkName: "pages/request" */))
 const _ac698da2 = () => interopDefault(import('../pages/requests.vue' /* webpackChunkName: "pages/requests" */))
 const _3f931b8d = () => interopDefault(import('../pages/revisor-view.vue' /* webpackChunkName: "pages/revisor-view" */))
@@ -58,6 +59,10 @@ export const routerOptions = {
     path: "/module",
     component: _7143f6d2,
     name: "module"
+  }, {
+    path: "/report-students",
+    component: _23bf23f6,
+    name: "report-students"
   }, {
     path: "/request",
     component: _9a719318,

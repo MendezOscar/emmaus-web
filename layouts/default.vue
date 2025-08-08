@@ -224,6 +224,12 @@ export default {
           access: "admin"
         },
         {
+          icon: 'mdi-file-chart',
+          title: 'Reportes de estudiantes',
+          to: '/report-students',
+          access: "admin"
+        },
+        {
           icon: 'mdi-animation',
           title: 'Solicitudes',
           to: '/requests',
