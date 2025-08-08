@@ -7683,7 +7683,7 @@ var VTextField = __webpack_require__(156);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTooltip/VTooltip.js
 var VTooltip = __webpack_require__(228);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/report-students.vue?vue&type=template&id=2afd1344&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/report-students.vue?vue&type=template&id=4ab35673&
 
 
 
@@ -7695,7 +7695,7 @@ var VTooltip = __webpack_require__(228);
 
 
 
-var report_studentsvue_type_template_id_2afd1344_render = function render() {
+var report_studentsvue_type_template_id_4ab35673_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VCol["a" /* default */], {
@@ -7793,7 +7793,7 @@ var report_studentsvue_type_template_id_2afd1344_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/report-students.vue?vue&type=template&id=2afd1344&
+// CONCATENATED MODULE: ./pages/report-students.vue?vue&type=template&id=4ab35673&
 
 // EXTERNAL MODULE: ./plugins/firebase.js
 var firebase = __webpack_require__(22);
@@ -7829,6 +7829,12 @@ var firestore_ = __webpack_require__(40);
     }, {
       text: 'Departamento',
       value: 'department'
+    }, {
+      text: 'Año',
+      value: 'year'
+    }, {
+      text: 'Mes',
+      value: 'month'
     }, {
       text: 'Estado',
       value: 'status'
@@ -7867,7 +7873,7 @@ var componentNormalizer = __webpack_require__(21);
 
 var component = Object(componentNormalizer["a" /* default */])(
   pages_report_studentsvue_type_script_lang_js_,
-  report_studentsvue_type_template_id_2afd1344_render,
+  report_studentsvue_type_template_id_4ab35673_render,
   staticRenderFns,
   false,
   null,

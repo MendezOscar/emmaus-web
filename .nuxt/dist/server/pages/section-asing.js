@@ -8831,7 +8831,7 @@ var VTextField = __webpack_require__(156);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTooltip/VTooltip.js
 var VTooltip = __webpack_require__(228);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/section-asing.vue?vue&type=template&id=75b913c0&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/section-asing.vue?vue&type=template&id=4d318a52&
 
 
 
@@ -8848,7 +8848,7 @@ var VTooltip = __webpack_require__(228);
 
 
 
-var section_asingvue_type_template_id_75b913c0_render = function render() {
+var section_asingvue_type_template_id_4d318a52_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VCol["a" /* default */], {
@@ -9095,7 +9095,7 @@ var section_asingvue_type_template_id_75b913c0_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/section-asing.vue?vue&type=template&id=75b913c0&
+// CONCATENATED MODULE: ./pages/section-asing.vue?vue&type=template&id=4d318a52&
 
 // EXTERNAL MODULE: ./plugins/firebase.js
 var firebase = __webpack_require__(22);
@@ -9226,6 +9226,8 @@ var firestore_ = __webpack_require__(40);
           idStudent: item.id,
           status: "EN CURSO",
           sectionId: this.sectionSelected.id,
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
           calification: 0
         });
         this.lessonCourse = [];
@@ -9284,7 +9286,7 @@ var componentNormalizer = __webpack_require__(21);
 
 var component = Object(componentNormalizer["a" /* default */])(
   pages_section_asingvue_type_script_lang_js_,
-  section_asingvue_type_template_id_75b913c0_render,
+  section_asingvue_type_template_id_4d318a52_render,
   staticRenderFns,
   false,
   null,

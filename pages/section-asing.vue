@@ -159,7 +159,7 @@ export default {
     lessonCourse: [],
     sectionStudentToNewField: [],
 
-    churchName:"",
+    churchName: "",
     department: "",
   }),
   methods: {
@@ -239,6 +239,8 @@ export default {
           idStudent: item.id,
           status: "EN CURSO",
           sectionId: this.sectionSelected.id,
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
           calification: 0
         });
 

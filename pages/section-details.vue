@@ -148,8 +148,11 @@ export default {
       { text: 'Curso', value: 'courseName' },
       { text: 'Asamblea', value: 'churchName' },
       { text: 'Departamento', value: 'department' },
-      { text: 'Estado', value: 'status' },
+      { text: 'Año', value: 'year' },
+      { text: 'Mes', value: 'month' },
       { text: 'Nota', value: 'calification' },
+      { text: 'Estado', value: 'status' },
+
       { text: 'Acciones', value: 'actions' },
     ],
     students: [],
