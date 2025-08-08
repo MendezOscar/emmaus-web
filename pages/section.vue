@@ -64,7 +64,7 @@
               </v-card>
             </v-dialog>
 
-            <v-dialog v-model="dialogClose" max-width="600px">
+            <v-dialog v-model="dialogClose" max-width="800px">
               <v-card>
                 <v-card-title class="text-h5">¿Estas seguro de cerrar esta seccion?</v-card-title>
                 <v-card-actions>
@@ -85,15 +85,19 @@
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col cols="6" md="4">
+                      <v-col cols="6" md="3">
                         <v-combobox v-model="courseId" :items="coursesName" @change="onChangeCourseId"
                           label="Seleccione el ID del curso"></v-combobox>
                       </v-col>
-                      <v-col cols="12" md="4">
+                      <v-col cols="12" md="3">
                         <v-text-field label="Nombre de la seccion" v-model="name" required></v-text-field>
                       </v-col>
-                      <v-col cols="6" md="4">
+                      <v-col cols="6" md="3">
                         <v-combobox v-model="revisorName" :items="revisorsName" label="Asignar revisor"></v-combobox>
+                      </v-col>
+                      <v-col cols="12" md="3">
+                        <v-combobox v-model="churchName" :items="churchesNames"
+                          label="Seleccione la sala evangélica"></v-combobox>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -145,6 +149,8 @@ export default {
       { text: 'Curso', value: 'courseId' },
       { text: 'Estado', value: 'status' },
       { text: 'Revisor', value: 'revisorName' },
+      { text: 'Asamblea', value: 'churchName' },
+      { text: 'Departamento', value: 'department' },
       { text: 'Acciones', value: 'actions', sortable: false },
     ],
     id: "",
@@ -261,6 +267,7 @@ export default {
       this.name = item.name;
       this.revisorName = item.revisorName;
       this.courseId = item.courseId + "-" + item.courseName;
+      this.churchName = item.churchName + "-" + item.department;
       this.id = item.id;
     },
 
@@ -294,6 +301,8 @@ export default {
           courseId: this.courseId.split("-")[0],
           courseName: this.courseId.split("-")[1],
           status: this.status,
+          churchName: this.churchName.split("-")[0],
+          department: this.churchName.split("-")[1],
           revisorName: this.revisorName,
         });
       } else {
@@ -303,6 +312,8 @@ export default {
           name: this.name,
           courseId: this.courseId.split("-")[0],
           courseName: this.courseId.split("-")[1],
+          churchName: this.churchName.split("-")[0],
+          department: this.churchName.split("-")[1],
           status: this.status,
           revisorName: this.revisorName,
         });

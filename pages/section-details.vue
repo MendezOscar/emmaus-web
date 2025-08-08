@@ -61,8 +61,8 @@
           <template>
             <v-card>
 
-              <v-text-field v-model="search" class="ml-10 mr-10 mb-10" append-icon="mdi-magnify" label="Buscar estudiante"
-                single-line hide-details></v-text-field>
+              <v-text-field v-model="search" class="ml-10 mr-10 mb-10" append-icon="mdi-magnify"
+                label="Buscar estudiante" single-line hide-details></v-text-field>
 
               <v-data-table :headers="headers" :items="sectionStudentSelected" :search="search" class="elevation-1">
                 <template v-slot:item.actions="{ item }">
@@ -145,7 +145,9 @@ export default {
         value: 'nameStudent',
       },
       { text: 'Seccion', value: 'id' },
-      { text: 'Curso', value: 'courseId' },
+      { text: 'Curso', value: 'courseName' },
+      { text: 'Asamblea', value: 'churchName' },
+      { text: 'Departamento', value: 'department' },
       { text: 'Estado', value: 'status' },
       { text: 'Nota', value: 'calification' },
       { text: 'Acciones', value: 'actions' },
@@ -349,7 +351,7 @@ export default {
       });
       this.sections.forEach(element => {
         if (element.status === "En curso")
-          this.sectionsName.push(element.id + '-' + element.revisorName + '-' + element.courseId);
+          this.sectionsName.push(element.id + '-' + element.courseId + '-' + element.courseName + '-' + element.revisorName + '-' + element.churchName + '-' + element.department);
       });
     },
 
@@ -360,7 +362,7 @@ export default {
       var sectionSelected = this.section.split('-');
       this.sectionId = sectionSelected[0];
 
-      this.revisorName = sectionSelected[1];
+      this.revisorName = sectionSelected[3];
       this.course = sectionSelected[2];
 
       const sectionRef = collection(db, "section-student");

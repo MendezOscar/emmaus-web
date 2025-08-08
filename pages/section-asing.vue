@@ -136,8 +136,8 @@ export default {
         sortable: false,
         value: 'nameStudent',
       },
-      { text: 'Seccion', value: 'id' },
-      { text: 'Curso', value: 'courseId' },
+      { text: 'Seccion', value: 'sectionId' },
+      { text: 'Curso', value: 'courseName' },
       { text: 'Acciones', value: 'actions', sortable: false },
     ],
     students: [],
@@ -157,7 +157,10 @@ export default {
     lessons: [],
     lessonsToSAve: [],
     lessonCourse: [],
-    sectionStudentToNewField: []
+    sectionStudentToNewField: [],
+
+    churchName:"",
+    department: "",
   }),
   methods: {
 
@@ -189,14 +192,15 @@ export default {
       });
       this.sections.forEach(element => {
         if (element.status === "En curso")
-          this.sectionsName.push(element.name + '-' + element.id + '-' + element.revisorName);
+          this.sectionsName.push(element.id + '-' + element.name + '-' + element.revisorName + '-' + element.churchName + '-' + element.department);
       });
     },
 
     getSpecificSecion() {
       this.sections.forEach(element => {
-        if (element.id === this.section.split('-')[2])
+        if (element.id === this.section.split('-')[0])
           this.sectionSelected = element;
+        console.log(this.sectionSelected);
       });
     },
 
@@ -206,7 +210,7 @@ export default {
 
       const studentsSectionRef = collection(db, "section-student");
       const qss = query(studentsSectionRef,
-        where("sectionId", "==", this.section.split('-')[2]),
+        where("sectionId", "==", this.sectionSelected.id),
       );
 
       const querySnapshot = await getDocs(qss);
@@ -215,11 +219,10 @@ export default {
       });
 
       this.sectionStudent.forEach(element => {
-        if (element.id.split('-')[1] === this.section.split('-')[2])
+        if (element.id.split('-')[1] === this.section.split('-')[0])
           this.sectionStudentSelected.push(element);
       });
 
-      console.log(this.sectionStudent.length);
     },
 
     async asignStudents(item) {
@@ -227,10 +230,13 @@ export default {
 
         await setDoc(doc(db, "section-student", item.id + "-" + this.sectionSelected.id), {
           id: item.id + "-" + this.sectionSelected.id,
-          courseId: this.section.slice(0, 4),
+          courseId: this.section.split('-')[1],
+          courseName: this.section.split('-')[2],
+          revisorName: this.section.split('-')[3],
+          churchName: this.section.split('-')[4],
+          department: this.section.split('-')[5],
           nameStudent: item.name,
           idStudent: item.id,
-          revisorName: this.sectionSelected.revisorName,
           status: "EN CURSO",
           sectionId: this.sectionSelected.id,
           calification: 0
