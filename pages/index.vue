@@ -22,11 +22,11 @@
         </v-container>
         <v-container>
           <v-row>
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="4">
               <v-text-field label="Teléfono (sin guiones)" v-model="phone" required></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="4">
               <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
                 transition="scale-transition" offset-y min-width="auto">
                 <template v-slot:activator="{ on, attrs }">
@@ -44,12 +44,21 @@
                 </v-date-picker>
               </v-menu>
             </v-col>
-            <v-col cols="12" md="3">
+            <v-col cols="12" md="4">
               <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
             </v-col>
-            <v-col cols="12" md="3">
-              <v-text-field label="Nombre de asamblea" v-model="church" required></v-text-field>
+          </v-row>
+        </v-container>
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="4">
+              <v-combobox v-model="churchName" :items="churchesNames" label="Seleccione la sala evangélica"></v-combobox>
             </v-col>
+
+            <v-col cols="12" md="4">
+              <v-text-field label="Codigo" v-model="code" required></v-text-field>
+            </v-col>
+
           </v-row>
         </v-container>
         <v-btn class="mr-4 mt-10" @click="register()">
@@ -78,14 +87,19 @@
 import {
   auth,
   db,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
 } from '@/plugins/firebase'
 import {
   setDoc,
-  doc
+  doc,
+  getDocs,
+  collection
 } from "firebase/firestore";
 
 export default {
+  mounted() {
+    this.getChurches();
+  },
   data() {
     return {
       snackbar: false,
@@ -107,16 +121,41 @@ export default {
       date: null,
       menu: false,
       modal: false,
+      code: '',
       educationItems: [
         'Primaria',
         'Secundaria',
         'Universitaria',
+      ],
+      department: "",
+      departmentItems: [
+        'Atlántida',
+        'Choluteca',
+        'Colón',
+        'Comayagua',
+        'Cortés',
+        'Copán',
+        'El Paraíso',
+        'Francisco Morazán',
+        'Gracias a Dios',
+        'Intibucá',
+        'Islas de la Bahía',
+        'La Paz',
+        'Lempira',
+        'Ocotepeque',
+        'Olancho',
+        'Santa Bárbara',
+        'Valle',
+        'Yoro'
       ],
       civilStatusItem: [
         "Casado",
         "Soltero",
         "Viudo"
       ],
+      churchName: '',
+      churches: [],
+      churchesNames: [],
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -143,15 +182,26 @@ export default {
         email: this.email,
         phone: this.phone,
         dateOfBirth: this.date,
-        church: this.church,
         dni: this.dni,
         currentCourse: '',
-        id: studentId
+        id: studentId,
+        churchName: this.churchName.split("-")[0],
+        department: this.churchName.split("-")[1],
+        code: this.code
       });
       this.snackbar = true;
-      this.addUser(studentId);
+      //this.addUser(studentId);
       this.createUser();
       this.clear();
+    },
+    async getChurches() {
+      this.churches = [];
+      const querySnapshot = await getDocs(collection(db, "church"));
+      querySnapshot.forEach((doc) => {
+        this.churches.push(doc.data());
+        this.churchesNames.push(doc.data().church + "-" + doc.data().department);
+
+      });
     },
     async createUser() {
       createUserWithEmailAndPassword(auth, this.email, "emmaus-est-2022")
@@ -187,6 +237,7 @@ export default {
       this.churchDones = "";
       this.church = "";
       this.dni = "";
+      this.code = "";
     },
   },
 }

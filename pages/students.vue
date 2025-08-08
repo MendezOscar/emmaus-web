@@ -119,7 +119,8 @@
                         <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
                       </v-col>
                       <v-col cols="12" md="4">
-                        <v-text-field label="Nombre de asamblea" v-model="church" required></v-text-field>
+                        <v-combobox v-model="churchName" :items="churchesNames"
+                          label="Seleccione la sala evangélica"></v-combobox>
                       </v-col>
 
                       <v-col cols="12" md="4">
@@ -167,6 +168,7 @@ import {
 
 export default {
   mounted() {
+    this.getChurches();
   },
   data: () => ({
     changeRevisor: false,
@@ -185,7 +187,7 @@ export default {
     },
     {
       text: 'Asamblea',
-      value: 'church'
+      value: 'churchName'
     },
     {
       text: 'Direccion',
@@ -218,7 +220,7 @@ export default {
     civilStatus: "",
     dateOfBirth: "",
     churchDones: "",
-    church: "",
+    churchName: "",
     dni: "",
     currentCourse: "",
     code: '',
@@ -234,6 +236,9 @@ export default {
       "Soltero",
       "Viudo"
     ],
+    churchName: '',
+    churches: [],
+    churchesNames: [],
     emailRules: [
       v => !!v || 'E-mail is required',
       v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
@@ -246,6 +251,15 @@ export default {
 
   }),
   methods: {
+    async getChurches() {
+      this.churches = [];
+      const querySnapshot = await getDocs(collection(db, "church"));
+      querySnapshot.forEach((doc) => {
+        this.churches.push(doc.data());
+        this.churchesNames.push(doc.data().church + "-" + doc.data().department);
+
+      });
+    },
     download() {
       if (this.studentCode != "") {
         const fileName = "students";
@@ -290,7 +304,7 @@ export default {
             location: item[3],
             email: item[4],
             dateOfBirth: item[5],
-            church: item[6],
+            churchName: item[6],
             phone: item[7],
             currentCourse: '',
             id: studentId
@@ -371,7 +385,7 @@ export default {
       this.email = item.email;
       this.phone = item.phone;
       this.dateOfBirth = Date(item.dateOfBirth);
-      this.church = item.church;
+      this.churchName = item.churchName;
       this.dni = item.dni;
       this.currentCourse = item.currentCourse;
       this.id = item.id
@@ -385,7 +399,7 @@ export default {
         email: this.email,
         phone: this.phone,
         dateOfBirth: this.date,
-        church: this.church,
+        churchName: this.churchName,
         dni: this.dni,
         currentCourse: this.currentCourse,
         code: this.code

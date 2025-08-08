@@ -158,6 +158,12 @@ export default {
           access: "admin"
         },
         {
+          icon: 'mdi-church',
+          title: 'Iglesias',
+          to: '/church',
+          access: "admin"
+        },
+        {
           icon: 'mdi-shape-outline',
           title: 'Niveles',
           to: '/level',
@@ -173,12 +179,6 @@ export default {
           icon: 'mdi-book-open-blank-variant',
           title: 'Cursos',
           to: '/courses',
-          access: "admin"
-        },
-        {
-          icon: 'mdi-bookmark-box-multiple',
-          title: 'Lecciones',
-          to: '/lessons',
           access: "admin"
         },
         {

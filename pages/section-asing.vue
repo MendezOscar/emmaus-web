@@ -126,7 +126,7 @@ export default {
         sortable: false,
         value: 'name',
       },
-      { text: 'Asamblea', value: 'church' },
+      { text: 'Asamblea', value: 'churchName' },
       { text: 'Acciones', value: 'actions', sortable: false },
     ],
     sectionHeaders: [

@@ -43,7 +43,7 @@ module.exports =
 /******/
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({"1":"pages/courses","2":"pages/index","3":"pages/inspire","4":"pages/lessons","5":"pages/level","6":"pages/module","7":"pages/request","8":"pages/requests","9":"pages/revisor-view","10":"pages/revisors","11":"pages/section","12":"pages/section-asing","13":"pages/section-details","14":"pages/student-course-view","15":"pages/students","16":"pages/students-view","17":"pages/users"}[chunkId]||chunkId) + ".js");
+/******/ 			var chunk = require("./" + ({"1":"pages/church","2":"pages/courses","3":"pages/index","4":"pages/inspire","5":"pages/lessons","6":"pages/level","7":"pages/module","8":"pages/request","9":"pages/requests","10":"pages/revisor-view","11":"pages/revisors","12":"pages/section","13":"pages/section-asing","14":"pages/section-details","15":"pages/student-course-view","16":"pages/students","17":"pages/students-view","18":"pages/users"}[chunkId]||chunkId) + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -1127,7 +1127,7 @@ var registrable = __webpack_require__(31);
 var ripple = __webpack_require__(19);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/transitions/index.js + 2 modules
-var transitions = __webpack_require__(53);
+var transitions = __webpack_require__(52);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/util/mixins.js
 var mixins = __webpack_require__(3);
@@ -3443,7 +3443,7 @@ class breakpoint_Breakpoint extends service["a" /* Service */] {
 }
 breakpoint_Breakpoint.property = 'breakpoint';
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/services/goto/index.js + 2 modules
-var services_goto = __webpack_require__(137);
+var services_goto = __webpack_require__(138);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/services/icons/presets/mdi-svg.js
 const icons = {
@@ -5728,43 +5728,6 @@ const ClickOutside = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export Resize */
-function inserted(el, binding, vnode) {
-  const callback = binding.value;
-  const options = binding.options || {
-    passive: true
-  };
-  window.addEventListener('resize', callback, options);
-  el._onResize = Object(el._onResize);
-  el._onResize[vnode.context._uid] = {
-    callback,
-    options
-  };
-  if (!binding.modifiers || !binding.modifiers.quiet) {
-    callback();
-  }
-}
-function unbind(el, binding, vnode) {
-  var _a;
-  if (!((_a = el._onResize) === null || _a === void 0 ? void 0 : _a[vnode.context._uid])) return;
-  const {
-    callback,
-    options
-  } = el._onResize[vnode.context._uid];
-  window.removeEventListener('resize', callback, options);
-  delete el._onResize[vnode.context._uid];
-}
-const Resize = {
-  inserted,
-  unbind
-};
-/* harmony default export */ __webpack_exports__["a"] = (Resize);
-
-/***/ }),
-/* 53 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "c", function() { return /* binding */ VFadeTransition; });
@@ -6007,6 +5970,43 @@ const VExpandXTransition = createJavascriptTransition('expand-x-transition', exp
     VExpandXTransition
   }
 });
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export Resize */
+function inserted(el, binding, vnode) {
+  const callback = binding.value;
+  const options = binding.options || {
+    passive: true
+  };
+  window.addEventListener('resize', callback, options);
+  el._onResize = Object(el._onResize);
+  el._onResize[vnode.context._uid] = {
+    callback,
+    options
+  };
+  if (!binding.modifiers || !binding.modifiers.quiet) {
+    callback();
+  }
+}
+function unbind(el, binding, vnode) {
+  var _a;
+  if (!((_a = el._onResize) === null || _a === void 0 ? void 0 : _a[vnode.context._uid])) return;
+  const {
+    callback,
+    options
+  } = el._onResize[vnode.context._uid];
+  window.removeEventListener('resize', callback, options);
+  delete el._onResize[vnode.context._uid];
+}
+const Resize = {
+  inserted,
+  unbind
+};
+/* harmony default export */ __webpack_exports__["a"] = (Resize);
 
 /***/ }),
 /* 54 */
@@ -8406,23 +8406,24 @@ function shouldScrollToTop(route) {
 
 
 
-const _e751ac06 = () => interopDefault(__webpack_require__.e(/* import() | pages/courses */ 1).then(__webpack_require__.bind(null, 286)));
-const _218a181f = () => interopDefault(__webpack_require__.e(/* import() | pages/inspire */ 3).then(__webpack_require__.bind(null, 287)));
-const _8ec3f200 = () => interopDefault(__webpack_require__.e(/* import() | pages/lessons */ 4).then(__webpack_require__.bind(null, 288)));
-const _bbae39ee = () => interopDefault(__webpack_require__.e(/* import() | pages/level */ 5).then(__webpack_require__.bind(null, 289)));
-const _655e29b7 = () => interopDefault(__webpack_require__.e(/* import() | pages/module */ 6).then(__webpack_require__.bind(null, 290)));
-const _56689558 = () => interopDefault(__webpack_require__.e(/* import() | pages/request */ 7).then(__webpack_require__.bind(null, 291)));
-const _6f52d362 = () => interopDefault(__webpack_require__.e(/* import() | pages/requests */ 8).then(__webpack_require__.bind(null, 292)));
-const _40eae8ad = () => interopDefault(__webpack_require__.e(/* import() | pages/revisor-view */ 9).then(__webpack_require__.bind(null, 293)));
-const _71de6dce = () => interopDefault(__webpack_require__.e(/* import() | pages/revisors */ 10).then(__webpack_require__.bind(null, 294)));
-const _9afbb2ac = () => interopDefault(__webpack_require__.e(/* import() | pages/section */ 11).then(__webpack_require__.bind(null, 295)));
-const _3e18420d = () => interopDefault(__webpack_require__.e(/* import() | pages/section-asing */ 12).then(__webpack_require__.bind(null, 296)));
-const _678a079f = () => interopDefault(__webpack_require__.e(/* import() | pages/section-details */ 13).then(__webpack_require__.bind(null, 301)));
-const _20e724ca = () => interopDefault(__webpack_require__.e(/* import() | pages/student-course-view */ 14).then(__webpack_require__.bind(null, 297)));
-const _7989f223 = () => interopDefault(__webpack_require__.e(/* import() | pages/students */ 15).then(__webpack_require__.bind(null, 298)));
-const _3c2b553f = () => interopDefault(__webpack_require__.e(/* import() | pages/students-view */ 16).then(__webpack_require__.bind(null, 285)));
-const _1a28f38d = () => interopDefault(__webpack_require__.e(/* import() | pages/users */ 17).then(__webpack_require__.bind(null, 299)));
-const _5681cd52 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 2).then(__webpack_require__.bind(null, 300)));
+const _66b08252 = () => interopDefault(__webpack_require__.e(/* import() | pages/church */ 1).then(__webpack_require__.bind(null, 287)));
+const _6a52ab1d = () => interopDefault(__webpack_require__.e(/* import() | pages/courses */ 2).then(__webpack_require__.bind(null, 286)));
+const _00f4cd82 = () => interopDefault(__webpack_require__.e(/* import() | pages/inspire */ 4).then(__webpack_require__.bind(null, 288)));
+const _d2ccefc0 = () => interopDefault(__webpack_require__.e(/* import() | pages/lessons */ 5).then(__webpack_require__.bind(null, 289)));
+const _b55ba7ae = () => interopDefault(__webpack_require__.e(/* import() | pages/level */ 6).then(__webpack_require__.bind(null, 290)));
+const _7143f6d2 = () => interopDefault(__webpack_require__.e(/* import() | pages/module */ 7).then(__webpack_require__.bind(null, 291)));
+const _9a719318 = () => interopDefault(__webpack_require__.e(/* import() | pages/request */ 8).then(__webpack_require__.bind(null, 292)));
+const _ac698da2 = () => interopDefault(__webpack_require__.e(/* import() | pages/requests */ 9).then(__webpack_require__.bind(null, 293)));
+const _3f931b8d = () => interopDefault(__webpack_require__.e(/* import() | pages/revisor-view */ 10).then(__webpack_require__.bind(null, 294)));
+const _535310ae = () => interopDefault(__webpack_require__.e(/* import() | pages/revisors */ 11).then(__webpack_require__.bind(null, 295)));
+const _df04b06c = () => interopDefault(__webpack_require__.e(/* import() | pages/section */ 12).then(__webpack_require__.bind(null, 296)));
+const _14766b2d = () => interopDefault(__webpack_require__.e(/* import() | pages/section-asing */ 13).then(__webpack_require__.bind(null, 297)));
+const _1f0268bf = () => interopDefault(__webpack_require__.e(/* import() | pages/section-details */ 14).then(__webpack_require__.bind(null, 302)));
+const _95ec142c = () => interopDefault(__webpack_require__.e(/* import() | pages/student-course-view */ 15).then(__webpack_require__.bind(null, 298)));
+const _5afe9503 = () => interopDefault(__webpack_require__.e(/* import() | pages/students */ 16).then(__webpack_require__.bind(null, 299)));
+const _12897e5f = () => interopDefault(__webpack_require__.e(/* import() | pages/students-view */ 17).then(__webpack_require__.bind(null, 285)));
+const _1d523cad = () => interopDefault(__webpack_require__.e(/* import() | pages/users */ 18).then(__webpack_require__.bind(null, 300)));
+const _502f3b12 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 3).then(__webpack_require__.bind(null, 301)));
 
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
@@ -8433,72 +8434,76 @@ const routerOptions = {
   linkExactActiveClass: 'nuxt-link-exact-active',
   scrollBehavior: router_scrollBehavior,
   routes: [{
+    path: "/church",
+    component: _66b08252,
+    name: "church"
+  }, {
     path: "/courses",
-    component: _e751ac06,
+    component: _6a52ab1d,
     name: "courses"
   }, {
     path: "/inspire",
-    component: _218a181f,
+    component: _00f4cd82,
     name: "inspire"
   }, {
     path: "/lessons",
-    component: _8ec3f200,
+    component: _d2ccefc0,
     name: "lessons"
   }, {
     path: "/level",
-    component: _bbae39ee,
+    component: _b55ba7ae,
     name: "level"
   }, {
     path: "/module",
-    component: _655e29b7,
+    component: _7143f6d2,
     name: "module"
   }, {
     path: "/request",
-    component: _56689558,
+    component: _9a719318,
     name: "request"
   }, {
     path: "/requests",
-    component: _6f52d362,
+    component: _ac698da2,
     name: "requests"
   }, {
     path: "/revisor-view",
-    component: _40eae8ad,
+    component: _3f931b8d,
     name: "revisor-view"
   }, {
     path: "/revisors",
-    component: _71de6dce,
+    component: _535310ae,
     name: "revisors"
   }, {
     path: "/section",
-    component: _9afbb2ac,
+    component: _df04b06c,
     name: "section"
   }, {
     path: "/section-asing",
-    component: _3e18420d,
+    component: _14766b2d,
     name: "section-asing"
   }, {
     path: "/section-details",
-    component: _678a079f,
+    component: _1f0268bf,
     name: "section-details"
   }, {
     path: "/student-course-view",
-    component: _20e724ca,
+    component: _95ec142c,
     name: "student-course-view"
   }, {
     path: "/students",
-    component: _7989f223,
+    component: _5afe9503,
     name: "students"
   }, {
     path: "/students-view",
-    component: _3c2b553f,
+    component: _12897e5f,
     name: "students-view"
   }, {
     path: "/users",
-    component: _1a28f38d,
+    component: _1d523cad,
     name: "users"
   }, {
     path: "/",
-    component: _5681cd52,
+    component: _502f3b12,
     name: "index"
   }],
   fallback: false
@@ -8733,7 +8738,7 @@ var error_component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   "35e10596",
-  "40c640eb"
+  "3d751b0b"
   
 )
 
@@ -8998,7 +9003,7 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
   false,
   nuxt_loading_injectStyles,
   null,
-  "ee43e554"
+  "25d4a776"
   
 )
 
@@ -9225,7 +9230,7 @@ var overlayable = __webpack_require__(59);
 var click_outside = __webpack_require__(51);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/directives/resize/index.js
-var resize = __webpack_require__(52);
+var resize = __webpack_require__(53);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/directives/touch/index.js
 var touch = __webpack_require__(60);
@@ -9580,7 +9585,7 @@ var VSpacer = __webpack_require__(149);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VToolbar/index.js
 var VToolbar = __webpack_require__(63);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=f24b07b0&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=640fd638&
 
 
 
@@ -9598,7 +9603,7 @@ var VToolbar = __webpack_require__(63);
 
 
 
-var defaultvue_type_template_id_f24b07b0_render = function render() {
+var defaultvue_type_template_id_640fd638_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VApp_VApp, {
@@ -9748,9 +9753,9 @@ var defaultvue_type_template_id_f24b07b0_render = function render() {
     }
   }, [_c('span', [_vm._v("© osda_dev " + _vm._s(new Date().getFullYear()))])])], 1);
 };
-var defaultvue_type_template_id_f24b07b0_staticRenderFns = [];
+var defaultvue_type_template_id_640fd638_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=f24b07b0&
+// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=640fd638&
 
 // EXTERNAL MODULE: ./plugins/firebase.js
 var firebase = __webpack_require__(22);
@@ -9811,6 +9816,11 @@ var firestore_ = __webpack_require__(40);
         to: '/inspire',
         access: "admin"
       }, {
+        icon: 'mdi-church',
+        title: 'Iglesias',
+        to: '/church',
+        access: "admin"
+      }, {
         icon: 'mdi-shape-outline',
         title: 'Niveles',
         to: '/level',
@@ -9824,11 +9834,6 @@ var firestore_ = __webpack_require__(40);
         icon: 'mdi-book-open-blank-variant',
         title: 'Cursos',
         to: '/courses',
-        access: "admin"
-      }, {
-        icon: 'mdi-bookmark-box-multiple',
-        title: 'Lecciones',
-        to: '/lessons',
         access: "admin"
       }, {
         icon: 'mdi-bookshelf',
@@ -9916,12 +9921,12 @@ var firestore_ = __webpack_require__(40);
 
 var default_component = Object(componentNormalizer["a" /* default */])(
   layouts_defaultvue_type_script_lang_js_,
-  defaultvue_type_template_id_f24b07b0_render,
-  defaultvue_type_template_id_f24b07b0_staticRenderFns,
+  defaultvue_type_template_id_640fd638_render,
+  defaultvue_type_template_id_640fd638_staticRenderFns,
   false,
   null,
   null,
-  "db50cc38"
+  "1eb86c04"
   
 )
 
@@ -10766,6 +10771,12 @@ module.exports = require("core-js/modules/esnext.map.update.js");
 
 /***/ }),
 /* 137 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.array.last-item.js");
+
+/***/ }),
+/* 138 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10926,12 +10937,6 @@ class goto_Goto extends service["a" /* Service */] {
   }
 }
 goto_Goto.property = 'goTo';
-
-/***/ }),
-/* 138 */
-/***/ (function(module, exports) {
-
-module.exports = require("core-js/modules/esnext.array.last-item.js");
 
 /***/ }),
 /* 139 */

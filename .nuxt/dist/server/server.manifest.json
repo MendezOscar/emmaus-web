@@ -1,6 +1,7 @@
 {
   "entry": "server.js",
   "files": {
+    "pages/church.js": "pages/church.js",
     "pages/courses.js": "pages/courses.js",
     "pages/index.js": "pages/index.js",
     "pages/inspire.js": "pages/inspire.js",
@@ -21,6 +22,7 @@
     "server.js": "server.js"
   },
   "maps": {
+    "pages/church.js": "pages/church.js.map",
     "pages/courses.js": "pages/courses.js.map",
     "pages/index.js": "pages/index.js.map",
     "pages/inspire.js": "pages/inspire.js.map",

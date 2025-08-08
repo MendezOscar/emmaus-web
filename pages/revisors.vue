@@ -116,7 +116,8 @@
                         <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
                       </v-col>
                       <v-col cols="12" md="3">
-                        <v-text-field label="Nombre de asamblea" v-model="church" required></v-text-field>
+                        <v-combobox v-model="churchName" :items="churchesNames"
+                          label="Seleccione la sala evangélica"></v-combobox>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -147,7 +148,7 @@ import { collection, getDocs, doc, deleteDoc, updateDoc, setDoc } from "firebase
 
 export default {
   mounted() {
-
+    this.getChurches();
   },
   data: () => ({
     saveMode: true,
@@ -161,7 +162,7 @@ export default {
         sortable: false,
         value: 'name',
       },
-      { text: 'Asamblea', value: 'church' },
+      { text: 'Asamblea', value: 'churchName' },
       { text: 'Direccion', value: 'location' },
       { text: 'Telefono', value: 'phone' },
       { text: 'Acciones', value: 'actions', sortable: false },
@@ -179,6 +180,9 @@ export default {
     church: "",
     dni: "",
     id: "",
+    churchName: '',
+    churches: [],
+    churchesNames: [],
 
     date: null,
     menu: false,
@@ -190,6 +194,16 @@ export default {
     dataFromFile: []
   }),
   methods: {
+
+    async getChurches() {
+      this.churches = [];
+      const querySnapshot = await getDocs(collection(db, "church"));
+      querySnapshot.forEach((doc) => {
+        this.churches.push(doc.data());
+        this.churchesNames.push(doc.data().church + "-" + doc.data().department);
+
+      });
+    },
 
     firestoreAutoId() {
       const CHARS =
@@ -318,7 +332,7 @@ export default {
       this.email = item.email;
       this.phone = item.phone;
       this.dateOfBirth = Date(item.dateOfBirth);
-      this.church = item.church;
+      this.churchName = item.churchName.split("-")[0] + "-" + item.department;
       this.dni = item.dni;
       this.id = item.id
     },
@@ -333,7 +347,8 @@ export default {
           email: this.email,
           phone: this.phone,
           dateOfBirth: this.date,
-          church: this.church,
+          churchName: this.churchName.split("-")[0],
+          department: this.churchName.split("-")[1],
           dni: this.dni
         });
       }
@@ -345,7 +360,8 @@ export default {
           email: this.email,
           phone: this.phone,
           dateOfBirth: this.date,
-          church: this.church,
+          churchName: this.churchName.split("-")[0],
+          department: this.churchName.split("-")[1],
           dni: this.dni,
         });
       }

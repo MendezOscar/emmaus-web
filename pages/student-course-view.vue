@@ -137,7 +137,7 @@ export default {
     async getStudent() {
       const studentRef = collection(db, "students");
       const qs = query(studentRef,
-        where("code", "==", Number.parseInt(this.studentCode)),
+        where("code", "==", this.studentCode),
       );
 
       const querySnapshot = await getDocs(qs);

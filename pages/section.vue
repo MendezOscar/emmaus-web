@@ -126,6 +126,7 @@ export default {
     this.Courses();
     this.Section();
     this.getRevisors();
+    this.getChurches()
   },
   data: () => ({
     saveMode: true,
@@ -163,9 +164,21 @@ export default {
     sectionId: '',
     modal: false,
     sectionStudents: [],
-    sectionToDelete: []
+    sectionToDelete: [],
+    churchName: '',
+    churches: [],
+    churchesNames: [],
   }),
   methods: {
+    async getChurches() {
+      this.churches = [];
+      const querySnapshot = await getDocs(collection(db, "church"));
+      querySnapshot.forEach((doc) => {
+        this.churches.push(doc.data());
+        this.churchesNames.push(doc.data().church + "-" + doc.data().department);
+
+      });
+    },
     async getRevisors() {
       const querySnapshot = await getDocs(collection(db, "revisors"));
       querySnapshot.forEach((doc) => {
@@ -247,7 +260,7 @@ export default {
       this.saveMode = false;
       this.name = item.name;
       this.revisorName = item.revisorName;
-      this.courseId = item.courseId;
+      this.courseId = item.courseId + "-" + item.courseName;
       this.id = item.id;
     },
 
@@ -272,12 +285,14 @@ export default {
     },
 
     async save() {
+
       if (this.saveMode) {
         this.sectionId = this.firestoreAutoId();
         await setDoc(doc(db, "sections", this.sectionId), {
           id: this.sectionId,
           name: this.name,
-          courseId: this.courseId,
+          courseId: this.courseId.split("-")[0],
+          courseName: this.courseId.split("-")[1],
           status: this.status,
           revisorName: this.revisorName,
         });
@@ -286,7 +301,8 @@ export default {
         await updateDoc(docRef, {
           id: this.id,
           name: this.name,
-          courseId: this.courseId,
+          courseId: this.courseId.split("-")[0],
+          courseName: this.courseId.split("-")[1],
           status: this.status,
           revisorName: this.revisorName,
         });
