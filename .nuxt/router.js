@@ -6,8 +6,8 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _66b08252 = () => interopDefault(import('../pages/church.vue' /* webpackChunkName: "pages/church" */))
 const _6a52ab1d = () => interopDefault(import('../pages/courses.vue' /* webpackChunkName: "pages/courses" */))
+const _7bd5461a = () => interopDefault(import('../pages/graph.vue' /* webpackChunkName: "pages/graph" */))
 const _00f4cd82 = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
-const _d2ccefc0 = () => interopDefault(import('../pages/lessons.vue' /* webpackChunkName: "pages/lessons" */))
 const _b55ba7ae = () => interopDefault(import('../pages/level.vue' /* webpackChunkName: "pages/level" */))
 const _7143f6d2 = () => interopDefault(import('../pages/module.vue' /* webpackChunkName: "pages/module" */))
 const _23bf23f6 = () => interopDefault(import('../pages/report-students.vue' /* webpackChunkName: "pages/report-students" */))
@@ -44,13 +44,13 @@ export const routerOptions = {
     component: _6a52ab1d,
     name: "courses"
   }, {
+    path: "/graph",
+    component: _7bd5461a,
+    name: "graph"
+  }, {
     path: "/inspire",
     component: _00f4cd82,
     name: "inspire"
-  }, {
-    path: "/lessons",
-    component: _d2ccefc0,
-    name: "lessons"
   }, {
     path: "/level",
     component: _b55ba7ae,

@@ -3,9 +3,9 @@
   "files": {
     "pages/church.js": "pages/church.js",
     "pages/courses.js": "pages/courses.js",
+    "pages/graph.js": "pages/graph.js",
     "pages/index.js": "pages/index.js",
     "pages/inspire.js": "pages/inspire.js",
-    "pages/lessons.js": "pages/lessons.js",
     "pages/level.js": "pages/level.js",
     "pages/module.js": "pages/module.js",
     "pages/report-students.js": "pages/report-students.js",
@@ -25,9 +25,9 @@
   "maps": {
     "pages/church.js": "pages/church.js.map",
     "pages/courses.js": "pages/courses.js.map",
+    "pages/graph.js": "pages/graph.js.map",
     "pages/index.js": "pages/index.js.map",
     "pages/inspire.js": "pages/inspire.js.map",
-    "pages/lessons.js": "pages/lessons.js.map",
     "pages/level.js": "pages/level.js.map",
     "pages/module.js": "pages/module.js.map",
     "pages/report-students.js": "pages/report-students.js.map",

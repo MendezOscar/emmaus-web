@@ -158,6 +158,12 @@ export default {
           access: "admin"
         },
         {
+          icon: 'mdi-chart-bar',
+          title: 'Graficas',
+          to: '/graph',
+          access: "admin"
+        },
+        {
           icon: 'mdi-church',
           title: 'Iglesias',
           to: '/church',

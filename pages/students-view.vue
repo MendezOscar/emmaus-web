@@ -3,7 +3,7 @@
         <v-col class="text-center">
             <img width="250" height="300" src="/emmaus.png" alt="Vuetify.js" class="mb-5">
 
-            <v-card>
+            <!-- <v-card>
                 <v-tabs v-model="tab" color="deep-purple-accent-4" align-tabs="center">
                     <v-tab :value="1">Todo</v-tab>
                     <v-tab :value="2">Actual</v-tab>
@@ -473,7 +473,7 @@
                         </v-container>
                     </v-window-item>
                 </v-window>
-            </v-card>
+            </v-card> -->
 
         </v-col>
     </v-row>
