@@ -158,9 +158,27 @@ export default {
           access: "admin"
         },
         {
+          icon: 'mdi-chart-line',
+          title: 'Estudiantes por mes',
+          to: '/graph-month',
+          access: "admin"
+        },
+        {
+          icon: 'mdi-chart-pie',
+          title: 'Estudiantes por departamento',
+          to: '/graph-department',
+          access: "admin"
+        },
+        {
           icon: 'mdi-chart-bar',
-          title: 'Graficas',
-          to: '/graph',
+          title: 'Estudiantes por asambleas',
+          to: '/graph-church',
+          access: "admin"
+        },
+        {
+          icon: 'mdi-chart-pie-outline',
+          title: 'Estudiantes por curso',
+          to: '/graph-course',
           access: "admin"
         },
         {

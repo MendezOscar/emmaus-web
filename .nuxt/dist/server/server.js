@@ -43,7 +43,7 @@ module.exports =
 /******/
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({"1":"pages/church","2":"pages/courses","3":"pages/graph","4":"pages/index","5":"pages/inspire","6":"pages/level","7":"pages/module","8":"pages/report-students","9":"pages/request","10":"pages/requests","11":"pages/revisor-view","12":"pages/revisors","13":"pages/section","14":"pages/section-asing","15":"pages/section-details","16":"pages/student-course-view","17":"pages/students","18":"pages/students-view","19":"pages/users"}[chunkId]||chunkId) + ".js");
+/******/ 			var chunk = require("./" + ({"1":"pages/church","2":"pages/courses","3":"pages/graph-church","4":"pages/graph-course","5":"pages/graph-department","6":"pages/graph-month","7":"pages/index","8":"pages/inspire","9":"pages/level","10":"pages/module","11":"pages/report-students","12":"pages/request","13":"pages/requests","14":"pages/revisor-view","15":"pages/revisors","16":"pages/section","17":"pages/section-asing","18":"pages/section-details","19":"pages/student-course-view","20":"pages/students","21":"pages/students-view","22":"pages/users"}[chunkId]||chunkId) + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -1109,7 +1109,7 @@ var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/binds-attrs/index.js
-var binds_attrs = __webpack_require__(18);
+var binds_attrs = __webpack_require__(20);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/mixins/bootable/index.js
 var bootable = __webpack_require__(52);
@@ -1603,7 +1603,7 @@ module.exports = require("ufo");
 "use strict";
 /* harmony import */ var _src_components_VSheet_VSheet_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(86);
 /* harmony import */ var _src_components_VSheet_VSheet_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VSheet_VSheet_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
+/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 /* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _mixins_elevatable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(32);
 /* harmony import */ var _mixins_measurable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(22);
@@ -2566,48 +2566,6 @@ const Ripple = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-
-/**
- * This mixin provides `attrs$` and `listeners$` to work around
- * vue bug https://github.com/vuejs/vue/issues/10115
- */
-
-function makeWatcher(property) {
-  return function (val, oldVal) {
-    for (const attr in oldVal) {
-      if (!Object.prototype.hasOwnProperty.call(val, attr)) {
-        this.$delete(this.$data[property], attr);
-      }
-    }
-    for (const attr in val) {
-      this.$set(this.$data[property], attr, val[attr]);
-    }
-  };
-}
-/* harmony default export */ __webpack_exports__["a"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
-  data: () => ({
-    attrs$: {},
-    listeners$: {}
-  }),
-  created() {
-    // Work around unwanted re-renders: https://github.com/vuejs/vue/issues/10115
-    // Make sure to use `attrs$` instead of `$attrs` (confusing right?)
-    this.$watch('$attrs', makeWatcher('attrs$'), {
-      immediate: true
-    });
-    this.$watch('$listeners', makeWatcher('listeners$'), {
-      immediate: true
-    });
-  }
-}));
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return normalizeComponent; });
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -2708,7 +2666,7 @@ function normalizeComponent(
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2755,6 +2713,48 @@ const db = Object(firebase_firestore__WEBPACK_IMPORTED_MODULE_1__["initializeFir
 const auth = Object(firebase_auth__WEBPACK_IMPORTED_MODULE_2__["getAuth"])(firebaseApp);
 const storage = Object(firebase_storage__WEBPACK_IMPORTED_MODULE_3__["getStorage"])(firebaseApp);
 
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * This mixin provides `attrs$` and `listeners$` to work around
+ * vue bug https://github.com/vuejs/vue/issues/10115
+ */
+
+function makeWatcher(property) {
+  return function (val, oldVal) {
+    for (const attr in oldVal) {
+      if (!Object.prototype.hasOwnProperty.call(val, attr)) {
+        this.$delete(this.$data[property], attr);
+      }
+    }
+    for (const attr in val) {
+      this.$set(this.$data[property], attr, val[attr]);
+    }
+  };
+}
+/* harmony default export */ __webpack_exports__["a"] = (vue__WEBPACK_IMPORTED_MODULE_0___default.a.extend({
+  data: () => ({
+    attrs$: {},
+    listeners$: {}
+  }),
+  created() {
+    // Work around unwanted re-renders: https://github.com/vuejs/vue/issues/10115
+    // Make sure to use `attrs$` instead of `$attrs` (confusing right?)
+    this.$watch('$attrs', makeWatcher('attrs$'), {
+      immediate: true
+    });
+    this.$watch('$listeners', makeWatcher('listeners$'), {
+      immediate: true
+    });
+  }
+}));
 
 /***/ }),
 /* 21 */
@@ -4651,7 +4651,7 @@ function attachedRoot(node) {
 "use strict";
 /* harmony import */ var _src_components_VIcon_VIcon_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(92);
 /* harmony import */ var _src_components_VIcon_VIcon_sass__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_src_components_VIcon_VIcon_sass__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
+/* harmony import */ var _mixins_binds_attrs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(20);
 /* harmony import */ var _mixins_colorable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
 /* harmony import */ var _mixins_sizeable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(31);
 /* harmony import */ var _mixins_themeable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7);
@@ -7803,25 +7803,28 @@ function shouldScrollToTop(route) {
 
 
 
-const _66b08252 = () => interopDefault(__webpack_require__.e(/* import() | pages/church */ 1).then(__webpack_require__.bind(null, 265)));
-const _6a52ab1d = () => interopDefault(__webpack_require__.e(/* import() | pages/courses */ 2).then(__webpack_require__.bind(null, 264)));
-const _7bd5461a = () => interopDefault(__webpack_require__.e(/* import() | pages/graph */ 3).then(__webpack_require__.bind(null, 266)));
-const _00f4cd82 = () => interopDefault(__webpack_require__.e(/* import() | pages/inspire */ 5).then(__webpack_require__.bind(null, 267)));
-const _b55ba7ae = () => interopDefault(__webpack_require__.e(/* import() | pages/level */ 6).then(__webpack_require__.bind(null, 268)));
-const _7143f6d2 = () => interopDefault(__webpack_require__.e(/* import() | pages/module */ 7).then(__webpack_require__.bind(null, 269)));
-const _23bf23f6 = () => interopDefault(__webpack_require__.e(/* import() | pages/report-students */ 8).then(__webpack_require__.bind(null, 270)));
-const _9a719318 = () => interopDefault(__webpack_require__.e(/* import() | pages/request */ 9).then(__webpack_require__.bind(null, 271)));
-const _ac698da2 = () => interopDefault(__webpack_require__.e(/* import() | pages/requests */ 10).then(__webpack_require__.bind(null, 272)));
-const _3f931b8d = () => interopDefault(__webpack_require__.e(/* import() | pages/revisor-view */ 11).then(__webpack_require__.bind(null, 273)));
-const _535310ae = () => interopDefault(__webpack_require__.e(/* import() | pages/revisors */ 12).then(__webpack_require__.bind(null, 274)));
-const _df04b06c = () => interopDefault(__webpack_require__.e(/* import() | pages/section */ 13).then(__webpack_require__.bind(null, 275)));
-const _14766b2d = () => interopDefault(__webpack_require__.e(/* import() | pages/section-asing */ 14).then(__webpack_require__.bind(null, 276)));
-const _1f0268bf = () => interopDefault(__webpack_require__.e(/* import() | pages/section-details */ 15).then(__webpack_require__.bind(null, 282)));
-const _95ec142c = () => interopDefault(__webpack_require__.e(/* import() | pages/student-course-view */ 16).then(__webpack_require__.bind(null, 277)));
-const _5afe9503 = () => interopDefault(__webpack_require__.e(/* import() | pages/students */ 17).then(__webpack_require__.bind(null, 278)));
-const _12897e5f = () => interopDefault(__webpack_require__.e(/* import() | pages/students-view */ 18).then(__webpack_require__.bind(null, 279)));
-const _1d523cad = () => interopDefault(__webpack_require__.e(/* import() | pages/users */ 19).then(__webpack_require__.bind(null, 280)));
-const _502f3b12 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 4).then(__webpack_require__.bind(null, 281)));
+const _66b08252 = () => interopDefault(__webpack_require__.e(/* import() | pages/church */ 1).then(__webpack_require__.bind(null, 283)));
+const _6a52ab1d = () => interopDefault(__webpack_require__.e(/* import() | pages/courses */ 2).then(__webpack_require__.bind(null, 282)));
+const _9e9f941e = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-church */ 3).then(__webpack_require__.bind(null, 284)));
+const _4c9afb36 = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-course */ 4).then(__webpack_require__.bind(null, 285)));
+const _2319891c = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-department */ 5).then(__webpack_require__.bind(null, 286)));
+const _200cb1a6 = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-month */ 6).then(__webpack_require__.bind(null, 287)));
+const _00f4cd82 = () => interopDefault(__webpack_require__.e(/* import() | pages/inspire */ 8).then(__webpack_require__.bind(null, 288)));
+const _b55ba7ae = () => interopDefault(__webpack_require__.e(/* import() | pages/level */ 9).then(__webpack_require__.bind(null, 289)));
+const _7143f6d2 = () => interopDefault(__webpack_require__.e(/* import() | pages/module */ 10).then(__webpack_require__.bind(null, 290)));
+const _23bf23f6 = () => interopDefault(__webpack_require__.e(/* import() | pages/report-students */ 11).then(__webpack_require__.bind(null, 291)));
+const _9a719318 = () => interopDefault(__webpack_require__.e(/* import() | pages/request */ 12).then(__webpack_require__.bind(null, 292)));
+const _ac698da2 = () => interopDefault(__webpack_require__.e(/* import() | pages/requests */ 13).then(__webpack_require__.bind(null, 293)));
+const _3f931b8d = () => interopDefault(__webpack_require__.e(/* import() | pages/revisor-view */ 14).then(__webpack_require__.bind(null, 294)));
+const _535310ae = () => interopDefault(__webpack_require__.e(/* import() | pages/revisors */ 15).then(__webpack_require__.bind(null, 295)));
+const _df04b06c = () => interopDefault(__webpack_require__.e(/* import() | pages/section */ 16).then(__webpack_require__.bind(null, 296)));
+const _14766b2d = () => interopDefault(__webpack_require__.e(/* import() | pages/section-asing */ 17).then(__webpack_require__.bind(null, 297)));
+const _1f0268bf = () => interopDefault(__webpack_require__.e(/* import() | pages/section-details */ 18).then(__webpack_require__.bind(null, 303)));
+const _95ec142c = () => interopDefault(__webpack_require__.e(/* import() | pages/student-course-view */ 19).then(__webpack_require__.bind(null, 298)));
+const _5afe9503 = () => interopDefault(__webpack_require__.e(/* import() | pages/students */ 20).then(__webpack_require__.bind(null, 299)));
+const _12897e5f = () => interopDefault(__webpack_require__.e(/* import() | pages/students-view */ 21).then(__webpack_require__.bind(null, 300)));
+const _1d523cad = () => interopDefault(__webpack_require__.e(/* import() | pages/users */ 22).then(__webpack_require__.bind(null, 301)));
+const _502f3b12 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 7).then(__webpack_require__.bind(null, 302)));
 
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
@@ -7840,9 +7843,21 @@ const routerOptions = {
     component: _6a52ab1d,
     name: "courses"
   }, {
-    path: "/graph",
-    component: _7bd5461a,
-    name: "graph"
+    path: "/graph-church",
+    component: _9e9f941e,
+    name: "graph-church"
+  }, {
+    path: "/graph-course",
+    component: _4c9afb36,
+    name: "graph-course"
+  }, {
+    path: "/graph-department",
+    component: _2319891c,
+    name: "graph-department"
+  }, {
+    path: "/graph-month",
+    component: _200cb1a6,
+    name: "graph-month"
   }, {
     path: "/inspire",
     component: _00f4cd82,
@@ -8118,7 +8133,7 @@ var staticRenderFns = [];
 // CONCATENATED MODULE: ./layouts/error.vue?vue&type=script&lang=js&
  /* harmony default export */ var layouts_errorvue_type_script_lang_js_ = (errorvue_type_script_lang_js_); 
 // EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__(19);
+var componentNormalizer = __webpack_require__(18);
 
 // CONCATENATED MODULE: ./layouts/error.vue
 
@@ -9335,7 +9350,7 @@ var VBtn = __webpack_require__(49);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(144);
+var VContainer = __webpack_require__(162);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VFooter/VFooter.sass
 var VFooter = __webpack_require__(114);
@@ -9853,7 +9868,7 @@ const VNavigationDrawer_baseMixins = Object(mixins["a" /* default */])(applicati
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(143);
+var VSpacer = __webpack_require__(161);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VToolbar/index.js
 // Components
@@ -9870,7 +9885,7 @@ const VToolbarItems = Object(helpers["j" /* createSimpleFunctional */])('v-toolb
     VToolbarTitle
   }
 });
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=0708bfb8&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./layouts/default.vue?vue&type=template&id=2d6df4f9&
 
 
 
@@ -9888,7 +9903,7 @@ const VToolbarItems = Object(helpers["j" /* createSimpleFunctional */])('v-toolb
 
 
 
-var defaultvue_type_template_id_0708bfb8_render = function render() {
+var defaultvue_type_template_id_2d6df4f9_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VApp_VApp, {
@@ -10038,12 +10053,12 @@ var defaultvue_type_template_id_0708bfb8_render = function render() {
     }
   }, [_c('span', [_vm._v("© osda_dev " + _vm._s(new Date().getFullYear()))])])], 1);
 };
-var defaultvue_type_template_id_0708bfb8_staticRenderFns = [];
+var defaultvue_type_template_id_2d6df4f9_staticRenderFns = [];
 
-// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=0708bfb8&
+// CONCATENATED MODULE: ./layouts/default.vue?vue&type=template&id=2d6df4f9&
 
 // EXTERNAL MODULE: ./plugins/firebase.js
-var firebase = __webpack_require__(20);
+var firebase = __webpack_require__(19);
 
 // EXTERNAL MODULE: external "firebase/firestore"
 var firestore_ = __webpack_require__(35);
@@ -10101,9 +10116,24 @@ var firestore_ = __webpack_require__(35);
         to: '/inspire',
         access: "admin"
       }, {
+        icon: 'mdi-chart-line',
+        title: 'Estudiantes por mes',
+        to: '/graph-month',
+        access: "admin"
+      }, {
+        icon: 'mdi-chart-pie',
+        title: 'Estudiantes por departamento',
+        to: '/graph-department',
+        access: "admin"
+      }, {
         icon: 'mdi-chart-bar',
-        title: 'Graficas',
-        to: '/graph',
+        title: 'Estudiantes por asambleas',
+        to: '/graph-church',
+        access: "admin"
+      }, {
+        icon: 'mdi-chart-pie-outline',
+        title: 'Estudiantes por curso',
+        to: '/graph-course',
         access: "admin"
       }, {
         icon: 'mdi-church',
@@ -10216,8 +10246,8 @@ var firestore_ = __webpack_require__(35);
 
 var default_component = Object(componentNormalizer["a" /* default */])(
   layouts_defaultvue_type_script_lang_js_,
-  defaultvue_type_template_id_0708bfb8_render,
-  defaultvue_type_template_id_0708bfb8_staticRenderFns,
+  defaultvue_type_template_id_2d6df4f9_render,
+  defaultvue_type_template_id_2d6df4f9_staticRenderFns,
   false,
   null,
   null,
@@ -11243,28 +11273,136 @@ module.exports = require("read-excel-file");
 /* 134 */
 /***/ (function(module, exports) {
 
-module.exports = require("export-from-json");
+module.exports = require("core-js/modules/esnext.set.add-all.js");
 
 /***/ }),
 /* 135 */
 /***/ (function(module, exports) {
 
-module.exports = require("url");
+module.exports = require("core-js/modules/esnext.set.delete-all.js");
 
 /***/ }),
 /* 136 */
 /***/ (function(module, exports) {
 
+module.exports = require("core-js/modules/esnext.set.difference.js");
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.every.js");
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.filter.js");
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.find.js");
+
+/***/ }),
+/* 140 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.intersection.js");
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.is-disjoint-from.js");
+
+/***/ }),
+/* 142 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.is-subset-of.js");
+
+/***/ }),
+/* 143 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.is-superset-of.js");
+
+/***/ }),
+/* 144 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.join.js");
+
+/***/ }),
+/* 145 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.map.js");
+
+/***/ }),
+/* 146 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.reduce.js");
+
+/***/ }),
+/* 147 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.some.js");
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.symmetric-difference.js");
+
+/***/ }),
+/* 149 */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/modules/esnext.set.union.js");
+
+/***/ }),
+/* 150 */
+/***/ (function(module, exports) {
+
+module.exports = require("vue-chartjs/legacy");
+
+/***/ }),
+/* 151 */
+/***/ (function(module, exports) {
+
+module.exports = require("chart.js");
+
+/***/ }),
+/* 152 */
+/***/ (function(module, exports) {
+
+module.exports = require("export-from-json");
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports) {
+
+module.exports = require("url");
+
+/***/ }),
+/* 154 */
+/***/ (function(module, exports) {
+
 module.exports = require("pdf-lib");
 
 /***/ }),
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */
+/* 155 */,
+/* 156 */,
+/* 157 */,
+/* 158 */,
+/* 159 */,
+/* 160 */,
+/* 161 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11276,7 +11414,7 @@ module.exports = require("pdf-lib");
 /* harmony default export */ __webpack_exports__["a"] = (Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__[/* createSimpleFunctional */ "j"])('spacer', 'div', 'v-spacer'));
 
 /***/ }),
-/* 144 */
+/* 162 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

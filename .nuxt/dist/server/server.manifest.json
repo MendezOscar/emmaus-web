@@ -3,7 +3,10 @@
   "files": {
     "pages/church.js": "pages/church.js",
     "pages/courses.js": "pages/courses.js",
-    "pages/graph.js": "pages/graph.js",
+    "pages/graph-church.js": "pages/graph-church.js",
+    "pages/graph-course.js": "pages/graph-course.js",
+    "pages/graph-department.js": "pages/graph-department.js",
+    "pages/graph-month.js": "pages/graph-month.js",
     "pages/index.js": "pages/index.js",
     "pages/inspire.js": "pages/inspire.js",
     "pages/level.js": "pages/level.js",
@@ -25,7 +28,10 @@
   "maps": {
     "pages/church.js": "pages/church.js.map",
     "pages/courses.js": "pages/courses.js.map",
-    "pages/graph.js": "pages/graph.js.map",
+    "pages/graph-church.js": "pages/graph-church.js.map",
+    "pages/graph-course.js": "pages/graph-course.js.map",
+    "pages/graph-department.js": "pages/graph-department.js.map",
+    "pages/graph-month.js": "pages/graph-month.js.map",
     "pages/index.js": "pages/index.js.map",
     "pages/inspire.js": "pages/inspire.js.map",
     "pages/level.js": "pages/level.js.map",

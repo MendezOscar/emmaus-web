@@ -248,7 +248,7 @@ export default {
 
         const docRef = doc(db, "students", item.id);
         await updateDoc(docRef, {
-          currentCourse: this.section.slice(0, 4)
+          currentCourse: this.section.split('-')[2],
         });
         this.snackbar = true;
         this.getStudents();
