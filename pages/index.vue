@@ -196,7 +196,7 @@ export default {
       });
       this.snackbar = true;
       //this.addUser(studentId);
-      this.createUser();
+      //this.createUser();
       this.clear();
     },
     async getChurches() {

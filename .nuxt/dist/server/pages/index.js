@@ -8308,7 +8308,7 @@ var VSpacer = __webpack_require__(161);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VTextField/VTextField.js + 3 modules
 var VTextField = __webpack_require__(169);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=template&id=2adfaf5d&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/index.vue?vue&type=template&id=71c97afd&
 
 
 
@@ -8322,7 +8322,7 @@ var VTextField = __webpack_require__(169);
 
 
 
-var lib_vue_loader_options_pagesvue_type_template_id_2adfaf5d_render = function render() {
+var lib_vue_loader_options_pagesvue_type_template_id_71c97afd_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VRow["a" /* default */], [_c(VCol["a" /* default */], {
@@ -8587,7 +8587,7 @@ var lib_vue_loader_options_pagesvue_type_template_id_2adfaf5d_render = function 
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/index.vue?vue&type=template&id=2adfaf5d&
+// CONCATENATED MODULE: ./pages/index.vue?vue&type=template&id=71c97afd&
 
 // EXTERNAL MODULE: ./plugins/firebase.js
 var firebase = __webpack_require__(19);
@@ -8664,7 +8664,7 @@ var firestore_ = __webpack_require__(35);
       });
       this.snackbar = true;
       //this.addUser(studentId);
-      this.createUser();
+      //this.createUser();
       this.clear();
     },
     async getChurches() {
@@ -8727,7 +8727,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   pagesvue_type_script_lang_js_,
-  lib_vue_loader_options_pagesvue_type_template_id_2adfaf5d_render,
+  lib_vue_loader_options_pagesvue_type_template_id_71c97afd_render,
   staticRenderFns,
   false,
   null,
