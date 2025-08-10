@@ -14,7 +14,7 @@
           <v-icon left>
             mdi-eye
           </v-icon>Exportar a excel</v-btn> -->
-        <v-file-input id="pdfFile" label="Cargar Diploma  " @change="uploadFromFile()"></v-file-input>
+        <!-- <v-file-input id="pdfFile" label="Cargar Diploma  " @change="uploadFromFile()"></v-file-input> -->
       </v-row>
       <v-row>
         <v-col>

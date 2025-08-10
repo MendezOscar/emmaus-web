@@ -19,11 +19,6 @@
                     </v-icon>Agregar
                     iglesia</v-btn>
                 </v-col>
-                <v-file-input id="fileData" label="Agregar desde archivo" @change="uploadFromFile()"></v-file-input>
-                <v-btn class="ml-3" prepend-icon="mdi-plus" size="x-large" @click="saveFromFile()">
-                  <v-icon left>
-                    mdi-plus
-                  </v-icon>Procesar Archivo</v-btn>
 
               </v-card-title>
               <v-data-table :headers="headers" :items="churches" :search="search">

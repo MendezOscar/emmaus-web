@@ -7803,29 +7803,29 @@ function shouldScrollToTop(route) {
 
 
 
-const _66b08252 = () => interopDefault(__webpack_require__.e(/* import() | pages/church */ 1).then(__webpack_require__.bind(null, 283)));
-const _6a52ab1d = () => interopDefault(__webpack_require__.e(/* import() | pages/courses */ 2).then(__webpack_require__.bind(null, 282)));
-const _9e9f941e = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-church */ 3).then(__webpack_require__.bind(null, 284)));
-const _4c9afb36 = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-course */ 4).then(__webpack_require__.bind(null, 285)));
-const _2319891c = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-department */ 5).then(__webpack_require__.bind(null, 286)));
-const _200cb1a6 = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-month */ 6).then(__webpack_require__.bind(null, 287)));
-const _00f4cd82 = () => interopDefault(__webpack_require__.e(/* import() | pages/inspire */ 8).then(__webpack_require__.bind(null, 288)));
-const _a395a0fe = () => interopDefault(__webpack_require__.e(/* import() | pages/inventory */ 9).then(__webpack_require__.bind(null, 289)));
-const _b55ba7ae = () => interopDefault(__webpack_require__.e(/* import() | pages/level */ 10).then(__webpack_require__.bind(null, 290)));
-const _7143f6d2 = () => interopDefault(__webpack_require__.e(/* import() | pages/module */ 11).then(__webpack_require__.bind(null, 291)));
-const _23bf23f6 = () => interopDefault(__webpack_require__.e(/* import() | pages/report-students */ 12).then(__webpack_require__.bind(null, 292)));
-const _9a719318 = () => interopDefault(__webpack_require__.e(/* import() | pages/request */ 13).then(__webpack_require__.bind(null, 293)));
-const _ac698da2 = () => interopDefault(__webpack_require__.e(/* import() | pages/requests */ 14).then(__webpack_require__.bind(null, 294)));
-const _3f931b8d = () => interopDefault(__webpack_require__.e(/* import() | pages/revisor-view */ 15).then(__webpack_require__.bind(null, 295)));
-const _535310ae = () => interopDefault(__webpack_require__.e(/* import() | pages/revisors */ 16).then(__webpack_require__.bind(null, 296)));
-const _df04b06c = () => interopDefault(__webpack_require__.e(/* import() | pages/section */ 17).then(__webpack_require__.bind(null, 297)));
-const _14766b2d = () => interopDefault(__webpack_require__.e(/* import() | pages/section-asing */ 18).then(__webpack_require__.bind(null, 298)));
-const _1f0268bf = () => interopDefault(__webpack_require__.e(/* import() | pages/section-details */ 19).then(__webpack_require__.bind(null, 304)));
-const _95ec142c = () => interopDefault(__webpack_require__.e(/* import() | pages/student-course-view */ 20).then(__webpack_require__.bind(null, 299)));
-const _5afe9503 = () => interopDefault(__webpack_require__.e(/* import() | pages/students */ 21).then(__webpack_require__.bind(null, 300)));
-const _12897e5f = () => interopDefault(__webpack_require__.e(/* import() | pages/students-view */ 22).then(__webpack_require__.bind(null, 301)));
-const _1d523cad = () => interopDefault(__webpack_require__.e(/* import() | pages/users */ 23).then(__webpack_require__.bind(null, 302)));
-const _502f3b12 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 7).then(__webpack_require__.bind(null, 303)));
+const _66b08252 = () => interopDefault(__webpack_require__.e(/* import() | pages/church */ 1).then(__webpack_require__.bind(null, 284)));
+const _6a52ab1d = () => interopDefault(__webpack_require__.e(/* import() | pages/courses */ 2).then(__webpack_require__.bind(null, 283)));
+const _9e9f941e = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-church */ 3).then(__webpack_require__.bind(null, 285)));
+const _4c9afb36 = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-course */ 4).then(__webpack_require__.bind(null, 286)));
+const _2319891c = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-department */ 5).then(__webpack_require__.bind(null, 287)));
+const _200cb1a6 = () => interopDefault(__webpack_require__.e(/* import() | pages/graph-month */ 6).then(__webpack_require__.bind(null, 288)));
+const _00f4cd82 = () => interopDefault(__webpack_require__.e(/* import() | pages/inspire */ 8).then(__webpack_require__.bind(null, 289)));
+const _a395a0fe = () => interopDefault(__webpack_require__.e(/* import() | pages/inventory */ 9).then(__webpack_require__.bind(null, 290)));
+const _b55ba7ae = () => interopDefault(__webpack_require__.e(/* import() | pages/level */ 10).then(__webpack_require__.bind(null, 291)));
+const _7143f6d2 = () => interopDefault(__webpack_require__.e(/* import() | pages/module */ 11).then(__webpack_require__.bind(null, 292)));
+const _23bf23f6 = () => interopDefault(__webpack_require__.e(/* import() | pages/report-students */ 12).then(__webpack_require__.bind(null, 293)));
+const _9a719318 = () => interopDefault(__webpack_require__.e(/* import() | pages/request */ 13).then(__webpack_require__.bind(null, 294)));
+const _ac698da2 = () => interopDefault(__webpack_require__.e(/* import() | pages/requests */ 14).then(__webpack_require__.bind(null, 295)));
+const _3f931b8d = () => interopDefault(__webpack_require__.e(/* import() | pages/revisor-view */ 15).then(__webpack_require__.bind(null, 296)));
+const _535310ae = () => interopDefault(__webpack_require__.e(/* import() | pages/revisors */ 16).then(__webpack_require__.bind(null, 297)));
+const _df04b06c = () => interopDefault(__webpack_require__.e(/* import() | pages/section */ 17).then(__webpack_require__.bind(null, 298)));
+const _14766b2d = () => interopDefault(__webpack_require__.e(/* import() | pages/section-asing */ 18).then(__webpack_require__.bind(null, 299)));
+const _1f0268bf = () => interopDefault(__webpack_require__.e(/* import() | pages/section-details */ 19).then(__webpack_require__.bind(null, 305)));
+const _95ec142c = () => interopDefault(__webpack_require__.e(/* import() | pages/student-course-view */ 20).then(__webpack_require__.bind(null, 300)));
+const _5afe9503 = () => interopDefault(__webpack_require__.e(/* import() | pages/students */ 21).then(__webpack_require__.bind(null, 301)));
+const _12897e5f = () => interopDefault(__webpack_require__.e(/* import() | pages/students-view */ 22).then(__webpack_require__.bind(null, 302)));
+const _1d523cad = () => interopDefault(__webpack_require__.e(/* import() | pages/users */ 23).then(__webpack_require__.bind(null, 303)));
+const _502f3b12 = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 7).then(__webpack_require__.bind(null, 304)));
 
 const emptyFn = () => {};
 external_vue_default.a.use(external_vue_router_default.a);
@@ -9355,7 +9355,7 @@ var VBtn = __webpack_require__(49);
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VContainer.js + 1 modules
-var VContainer = __webpack_require__(162);
+var VContainer = __webpack_require__(163);
 
 // EXTERNAL MODULE: ./node_modules/vuetify/src/components/VFooter/VFooter.sass
 var VFooter = __webpack_require__(114);
@@ -9873,7 +9873,7 @@ const VNavigationDrawer_baseMixins = Object(mixins["a" /* default */])(applicati
   }
 }));
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
-var VSpacer = __webpack_require__(161);
+var VSpacer = __webpack_require__(162);
 
 // CONCATENATED MODULE: ./node_modules/vuetify/lib/components/VToolbar/index.js
 // Components
@@ -11391,7 +11391,7 @@ module.exports = require("chart.js");
 /* 152 */
 /***/ (function(module, exports) {
 
-module.exports = require("export-from-json");
+module.exports = require("xlsx");
 
 /***/ }),
 /* 153 */
@@ -11406,13 +11406,19 @@ module.exports = require("url");
 module.exports = require("pdf-lib");
 
 /***/ }),
-/* 155 */,
+/* 155 */
+/***/ (function(module, exports) {
+
+module.exports = require("export-from-json");
+
+/***/ }),
 /* 156 */,
 /* 157 */,
 /* 158 */,
 /* 159 */,
 /* 160 */,
-/* 161 */
+/* 161 */,
+/* 162 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11424,7 +11430,7 @@ module.exports = require("pdf-lib");
 /* harmony default export */ __webpack_exports__["a"] = (Object(_util_helpers__WEBPACK_IMPORTED_MODULE_1__[/* createSimpleFunctional */ "j"])('spacer', 'div', 'v-spacer'));
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

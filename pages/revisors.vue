@@ -17,11 +17,11 @@
                   <v-icon left>
                     mdi-eye
                   </v-icon>Ver todos</v-btn>
-                <v-file-input id="fileData" label="Agregar desde archivo" @change="uploadFromFile()"></v-file-input>
+                <!-- <v-file-input id="fileData" label="Agregar desde archivo" @change="uploadFromFile()"></v-file-input>
                 <v-btn class="ml-3" prepend-icon="mdi-plus" size="x-large" @click="saveFromFile()">
                   <v-icon left>
                     mdi-plus
-                  </v-icon>Procesar Archivo</v-btn>
+                  </v-icon>Procesar Archivo</v-btn> -->
                 <v-col cols="auto ml-5">
                   <v-btn prepend-icon="mdi-plus" size="x-large" @click="add()">
                     <v-icon left>

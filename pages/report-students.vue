@@ -12,6 +12,11 @@
                 <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" single-line
                   hide-details></v-text-field>
 
+                <v-btn prepend-icon="mdi-plus" size="x-large" class="ml-5" @click="exportToExcel()">
+                  <v-icon left>
+                    mdi-eye
+                  </v-icon>Exportar a excel</v-btn>
+
               </v-card-title>
               <v-data-table :headers="headers" :items="sectionDetails" :search="search">
                 <template v-slot:item.actions="{ item }">
@@ -43,7 +48,8 @@
 
 <script>
 import { db } from "~/plugins/firebase.js";
-import { collection, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase/firestore";
+import * as XLSX from "xlsx";
+import { collection, getDocs } from "firebase/firestore";
 
 export default {
   mounted() {
@@ -83,6 +89,18 @@ export default {
     close() {
       this.dialog = false
     },
+    exportToExcel() {
+      // 1️⃣ Convertir datos a hoja de Excel
+      const ws = XLSX.utils.json_to_sheet(this.sectionDetails);
+
+      // 2️⃣ Crear un libro de trabajo y añadir la hoja
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Datos");
+
+      // 3️⃣ Exportar el archivo
+      XLSX.writeFile(wb, "Reporte de estudiantes.xlsx");
+
+    }
   }
 }
 </script>

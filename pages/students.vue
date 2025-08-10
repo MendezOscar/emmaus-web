@@ -47,6 +47,15 @@
                     <span>Delete estudiante</span>
                   </v-tooltip>
 
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon dark v-bind="attrs" v-on="on" @click="viewStudent(item)">
+                        mdi-eye
+                      </v-icon>
+                    </template>
+                    <span>Ver estudiante</span>
+                  </v-tooltip>
+
                 </template>
               </v-data-table>
             </v-card>
@@ -141,6 +150,21 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
+            <v-dialog v-model="viewStudentDialog" max-width="1600px">
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">Detalle de {{ selectedStudent?.name }}</span>
+                </v-card-title>
+
+                <v-card-text>
+                  <v-data-table :headers="headersDetails" :items="sectionStudent" :search="search">
+                  </v-data-table>
+                </v-card-text>
+
+                <v-card-actions>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </template>
         </v-col>
       </v-row>
@@ -163,7 +187,9 @@ import {
   doc,
   deleteDoc,
   updateDoc,
-  setDoc
+  setDoc,
+  query,
+  where
 } from "firebase/firestore";
 
 export default {
@@ -174,6 +200,8 @@ export default {
     changeRevisor: false,
     dialog: false,
     dialogDelete: false,
+    viewStudentDialog: false,
+    closeViewStudentDialog: false,
     search: '',
     headers: [{
       text: 'Nombre',
@@ -206,6 +234,22 @@ export default {
       value: 'actions',
       sortable: false
     },
+    ],
+    headersDetails: [{
+      text: 'Nombre',
+      align: 'start',
+      sortable: false,
+      value: 'nameStudent',
+    },
+    { text: 'Revisor', value: 'revisorName' },
+    { text: 'Seccion', value: 'sectionId' },
+    { text: 'Curso', value: 'courseName' },
+    { text: 'Asamblea', value: 'churchName' },
+    { text: 'Departamento', value: 'department' },
+    { text: 'Año', value: 'year' },
+    { text: 'Mes', value: 'month' },
+    { text: 'Estado', value: 'status' },
+    { text: 'Nota', value: 'calification' },
     ],
     id: "",
     students: [],
@@ -247,7 +291,10 @@ export default {
     courses: [],
     dniRevisor: "",
     dataFromFile: [],
-    dataToExport: []
+    dataToExport: [],
+    selectedStudent: "",
+    sectionStudentSelected: [],
+    sectionStudent: []
 
   }),
   methods: {
@@ -318,6 +365,32 @@ export default {
       this.getStudents();
     },
 
+    async getSectionStudents(item) {
+
+      this.sectionStudent = [];
+      this.sectionStudentSelected = [];
+
+      const sectionRef = collection(db, "section-student");
+      const qs = query(sectionRef,
+        where("idStudent", "==", item.id),
+      );
+
+      const querySnapshot = await getDocs(qs);
+      querySnapshot.forEach((doc) => {
+        this.sectionStudent.push(doc.data());
+        console.log("Hola");
+
+        console.log(this.sectionStudent);
+
+      });
+
+      this.sectionStudent.forEach(element => {
+        this.sectionStudentSelected.push(element);
+      });
+
+
+    },
+
     async createUser(email, code) {
       createUserWithEmailAndPassword(auth, email, code)
         .then((userCredential) => {
@@ -374,6 +447,12 @@ export default {
     closeDelete() {
       this.dialogDelete = false;
       this.getStudents();
+    },
+
+    viewStudent(item) {
+      this.getSectionStudents(item);
+      this.viewStudentDialog = true;
+      this.selectedStudent = item;
     },
 
     editItem(item) {

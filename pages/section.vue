@@ -293,6 +293,22 @@ export default {
 
     async save() {
 
+      if (!this.name || !this.courseId || !this.churchName || !this.revisorName) {
+        alert("Por favor, complete todos los campos requeridos.");
+        return;
+      }
+
+      var ifSectionExists = this.sections.some(section => section.churchName === this.churchName.split("-")[0]
+        && section.department === this.churchName.split("-")[1]
+        && section.courseId === this.courseId.split("-")[0]
+        && section.courseName === this.courseId.split("-")[1]
+        && section.revisorName === this.revisorName);
+
+      if (ifSectionExists) {
+        alert("Ya existe una sección con estos datos.");
+        return;
+      }
+
       if (this.saveMode) {
         this.sectionId = this.firestoreAutoId();
         await setDoc(doc(db, "sections", this.sectionId), {

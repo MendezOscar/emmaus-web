@@ -81,7 +81,7 @@
 
 <script>
 import { db } from "~/plugins/firebase.js";
-import exportFromJSON from "export-from-json";
+import * as XLSX from "xlsx";
 import { collection, query, where, getDocs, doc, updateDoc, setDoc, deleteDoc } from "firebase/firestore";
 
 export default {
@@ -183,10 +183,10 @@ export default {
 
     download() {
       if (this.studentCode != "") {
-        const fileName = "seccion";
-        const data = this.sectionStudentSelected;
-        const exportType = exportFromJSON.types.xls;
-        exportFromJSON({ data, fileName, exportType });
+        const ws = XLSX.utils.json_to_sheet(this.sectionStudentSelected);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Datos");
+        XLSX.writeFile(wb, "Reporte de estudiante.xlsx");
       } else {
         this.text = "Seleccione un estudiante primero"
         this.snackbar = true;
