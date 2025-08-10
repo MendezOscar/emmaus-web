@@ -11,6 +11,7 @@ const _4c9afb36 = () => interopDefault(import('../pages/graph-course.vue' /* web
 const _2319891c = () => interopDefault(import('../pages/graph-department.vue' /* webpackChunkName: "pages/graph-department" */))
 const _200cb1a6 = () => interopDefault(import('../pages/graph-month.vue' /* webpackChunkName: "pages/graph-month" */))
 const _00f4cd82 = () => interopDefault(import('../pages/inspire.vue' /* webpackChunkName: "pages/inspire" */))
+const _a395a0fe = () => interopDefault(import('../pages/inventory.vue' /* webpackChunkName: "pages/inventory" */))
 const _b55ba7ae = () => interopDefault(import('../pages/level.vue' /* webpackChunkName: "pages/level" */))
 const _7143f6d2 = () => interopDefault(import('../pages/module.vue' /* webpackChunkName: "pages/module" */))
 const _23bf23f6 = () => interopDefault(import('../pages/report-students.vue' /* webpackChunkName: "pages/report-students" */))
@@ -66,6 +67,10 @@ export const routerOptions = {
     path: "/inspire",
     component: _00f4cd82,
     name: "inspire"
+  }, {
+    path: "/inventory",
+    component: _a395a0fe,
+    name: "inventory"
   }, {
     path: "/level",
     component: _b55ba7ae,

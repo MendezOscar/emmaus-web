@@ -266,6 +266,10 @@ export default {
     },
 
     async save() {
+      if (this.id === '' || this.name === '' || this.module === '' || this.level === '' || this.sequence === '' || this.description === '') {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
       if (this.saveMode) {
         await setDoc(doc(db, "courses", this.id), {
           course: this.name,

@@ -228,6 +228,14 @@ export default {
     async asignStudents(item) {
       if (this.section != "") {
 
+        var studentsInThisSection = this.sectionStudentSelected.some(element => element.idStudent === item.id && element.calification > 60);
+
+        if (studentsInThisSection) {
+          this.text = "El estudiante ya se encuentra en esta seccion";
+          this.snackbar = true;
+          return;
+        }
+
         await setDoc(doc(db, "section-student", item.id + "-" + this.sectionSelected.id), {
           id: item.id + "-" + this.sectionSelected.id,
           courseId: this.section.split('-')[1],
@@ -280,6 +288,13 @@ export default {
     },
 
     deleteItem(item) {
+      var studentsInThisSection = this.sectionStudentSelected.some(element => element.idStudent === item.idStudent && element.calification > 0);
+
+      if (studentsInThisSection) {
+        this.text = "El estudiante no puede ser eliminado porque tiene calificaciones registradas";
+        this.snackbar = true;
+        return;
+      }
       this.dialogDelete = true;
       this.studentSection = item;
     },

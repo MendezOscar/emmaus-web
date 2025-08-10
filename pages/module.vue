@@ -201,6 +201,10 @@ export default {
     },
 
     async save() {
+      if (this.moduleId === '' || this.moduleName === '' || this.moduleLevel === '') {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
       if (this.saveMode) {
         await setDoc(doc(db, "modules", this.moduleId), {
           description: "",

@@ -175,6 +175,11 @@ export default {
       return autoId;
     },
     async register() {
+      if (!this.name || !this.location || !this.churchName || !this.code) {
+        this.snackbar = true;
+        this.text = 'Por favor, complete todos los campos requeridos.';
+        return;
+      }
       var studentId = this.firestoreAutoId();
       await setDoc(doc(db, "students", studentId), {
         name: this.name,

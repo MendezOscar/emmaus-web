@@ -3,132 +3,161 @@
     "name": "church",
     "path": "/church",
     "component": "/Users/mendez/dev/emmaus-web/pages/church.vue",
-    "chunkName": "pages/church"
+    "chunkName": "pages/church",
+    "_name": "_66b08252"
   },
   {
     "name": "courses",
     "path": "/courses",
     "component": "/Users/mendez/dev/emmaus-web/pages/courses.vue",
-    "chunkName": "pages/courses"
+    "chunkName": "pages/courses",
+    "_name": "_6a52ab1d"
   },
   {
     "name": "graph-church",
     "path": "/graph-church",
     "component": "/Users/mendez/dev/emmaus-web/pages/graph-church.vue",
-    "chunkName": "pages/graph-church"
+    "chunkName": "pages/graph-church",
+    "_name": "_9e9f941e"
   },
   {
     "name": "graph-course",
     "path": "/graph-course",
     "component": "/Users/mendez/dev/emmaus-web/pages/graph-course.vue",
-    "chunkName": "pages/graph-course"
+    "chunkName": "pages/graph-course",
+    "_name": "_4c9afb36"
   },
   {
     "name": "graph-department",
     "path": "/graph-department",
     "component": "/Users/mendez/dev/emmaus-web/pages/graph-department.vue",
-    "chunkName": "pages/graph-department"
+    "chunkName": "pages/graph-department",
+    "_name": "_2319891c"
   },
   {
     "name": "graph-month",
     "path": "/graph-month",
     "component": "/Users/mendez/dev/emmaus-web/pages/graph-month.vue",
-    "chunkName": "pages/graph-month"
+    "chunkName": "pages/graph-month",
+    "_name": "_200cb1a6"
   },
   {
     "name": "inspire",
     "path": "/inspire",
     "component": "/Users/mendez/dev/emmaus-web/pages/inspire.vue",
-    "chunkName": "pages/inspire"
+    "chunkName": "pages/inspire",
+    "_name": "_00f4cd82"
+  },
+  {
+    "name": "inventory",
+    "path": "/inventory",
+    "component": "/Users/mendez/dev/emmaus-web/pages/inventory.vue",
+    "chunkName": "pages/inventory",
+    "_name": "_a395a0fe"
   },
   {
     "name": "level",
     "path": "/level",
     "component": "/Users/mendez/dev/emmaus-web/pages/level.vue",
-    "chunkName": "pages/level"
+    "chunkName": "pages/level",
+    "_name": "_b55ba7ae"
   },
   {
     "name": "module",
     "path": "/module",
     "component": "/Users/mendez/dev/emmaus-web/pages/module.vue",
-    "chunkName": "pages/module"
+    "chunkName": "pages/module",
+    "_name": "_7143f6d2"
   },
   {
     "name": "report-students",
     "path": "/report-students",
     "component": "/Users/mendez/dev/emmaus-web/pages/report-students.vue",
-    "chunkName": "pages/report-students"
+    "chunkName": "pages/report-students",
+    "_name": "_23bf23f6"
   },
   {
     "name": "request",
     "path": "/request",
     "component": "/Users/mendez/dev/emmaus-web/pages/request.vue",
-    "chunkName": "pages/request"
+    "chunkName": "pages/request",
+    "_name": "_9a719318"
   },
   {
     "name": "requests",
     "path": "/requests",
     "component": "/Users/mendez/dev/emmaus-web/pages/requests.vue",
-    "chunkName": "pages/requests"
+    "chunkName": "pages/requests",
+    "_name": "_ac698da2"
   },
   {
     "name": "revisor-view",
     "path": "/revisor-view",
     "component": "/Users/mendez/dev/emmaus-web/pages/revisor-view.vue",
-    "chunkName": "pages/revisor-view"
+    "chunkName": "pages/revisor-view",
+    "_name": "_3f931b8d"
   },
   {
     "name": "revisors",
     "path": "/revisors",
     "component": "/Users/mendez/dev/emmaus-web/pages/revisors.vue",
-    "chunkName": "pages/revisors"
+    "chunkName": "pages/revisors",
+    "_name": "_535310ae"
   },
   {
     "name": "section",
     "path": "/section",
     "component": "/Users/mendez/dev/emmaus-web/pages/section.vue",
-    "chunkName": "pages/section"
+    "chunkName": "pages/section",
+    "_name": "_df04b06c"
   },
   {
     "name": "section-asing",
     "path": "/section-asing",
     "component": "/Users/mendez/dev/emmaus-web/pages/section-asing.vue",
-    "chunkName": "pages/section-asing"
+    "chunkName": "pages/section-asing",
+    "_name": "_14766b2d"
   },
   {
     "name": "section-details",
     "path": "/section-details",
     "component": "/Users/mendez/dev/emmaus-web/pages/section-details.vue",
-    "chunkName": "pages/section-details"
+    "chunkName": "pages/section-details",
+    "_name": "_1f0268bf"
   },
   {
     "name": "student-course-view",
     "path": "/student-course-view",
     "component": "/Users/mendez/dev/emmaus-web/pages/student-course-view.vue",
-    "chunkName": "pages/student-course-view"
+    "chunkName": "pages/student-course-view",
+    "_name": "_95ec142c"
   },
   {
     "name": "students",
     "path": "/students",
     "component": "/Users/mendez/dev/emmaus-web/pages/students.vue",
-    "chunkName": "pages/students"
+    "chunkName": "pages/students",
+    "_name": "_5afe9503"
   },
   {
     "name": "students-view",
     "path": "/students-view",
     "component": "/Users/mendez/dev/emmaus-web/pages/students-view.vue",
-    "chunkName": "pages/students-view"
+    "chunkName": "pages/students-view",
+    "_name": "_12897e5f"
   },
   {
     "name": "users",
     "path": "/users",
     "component": "/Users/mendez/dev/emmaus-web/pages/users.vue",
-    "chunkName": "pages/users"
+    "chunkName": "pages/users",
+    "_name": "_1d523cad"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/Users/mendez/dev/emmaus-web/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_502f3b12"
   }
 ]

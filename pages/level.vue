@@ -180,6 +180,10 @@ export default {
     },
 
     async save() {
+      if (this.levelId === '' || this.levelName === '') {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
       if (this.saveMode) {
         await setDoc(doc(db, "levels", this.levelId), {
           level: this.levelName,

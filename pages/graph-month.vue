@@ -119,7 +119,7 @@ export default {
       const querySnapshot = await getDocs(collection(db, "section-student"));
       querySnapshot.forEach((doc) => {
         this.sectionDetails.push(doc.data());
-        this.chartData.labels.push(this.months[doc.data().month - 1]);
+        this.chartData.labels.push(this.months[doc.data().month - 1] + ' - ' + doc.data().year);
         this.chartData.labels = [...new Set(this.chartData.labels)];
       });
 

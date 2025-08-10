@@ -259,6 +259,12 @@ export default {
           to: '/requests',
           access: "admin"
         },
+         {
+          icon: 'mdi-format-list-checks',
+          title: 'Inventario',
+          to: '/inventory',
+          access: "admin"
+        },
       ],
       miniVariant: false,
       right: true,

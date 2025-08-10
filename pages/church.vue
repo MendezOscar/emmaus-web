@@ -207,6 +207,10 @@ export default {
     },
 
     async save() {
+      if (this.churchId === '' || this.churchName === '' || this.department === '') {
+        alert("Por favor, complete todos los campos.");
+        return;
+      }
       if (this.saveMode) {
         await setDoc(doc(db, "church", this.churchId), {
           church: this.churchName,

@@ -854,7 +854,7 @@ var VRow = __webpack_require__(230);
 // EXTERNAL MODULE: ./node_modules/vuetify/lib/components/VGrid/VSpacer.js
 var VSpacer = __webpack_require__(161);
 
-// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/graph-month.vue?vue&type=template&id=55b170f7&
+// CONCATENATED MODULE: ./node_modules/vuetify-loader/lib/loader.js??ref--4!./node_modules/babel-loader/lib??ref--2-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--7!./node_modules/@nuxt/components/dist/loader.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./pages/graph-month.vue?vue&type=template&id=c99aebc8&
 
 
 
@@ -862,7 +862,7 @@ var VSpacer = __webpack_require__(161);
 
 
 
-var graph_monthvue_type_template_id_55b170f7_render = function render() {
+var graph_monthvue_type_template_id_c99aebc8_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c(VCol["a" /* default */], {
@@ -900,7 +900,7 @@ var graph_monthvue_type_template_id_55b170f7_render = function render() {
 };
 var staticRenderFns = [];
 
-// CONCATENATED MODULE: ./pages/graph-month.vue?vue&type=template&id=55b170f7&
+// CONCATENATED MODULE: ./pages/graph-month.vue?vue&type=template&id=c99aebc8&
 
 // EXTERNAL MODULE: external "core-js/modules/esnext.set.add-all.js"
 var esnext_set_add_all_js_ = __webpack_require__(134);
@@ -1046,7 +1046,7 @@ external_chart_js_["Chart"].register(external_chart_js_["Title"], external_chart
       const querySnapshot = await Object(firestore_["getDocs"])(Object(firestore_["collection"])(firebase["c" /* db */], "section-student"));
       querySnapshot.forEach(doc => {
         this.sectionDetails.push(doc.data());
-        this.chartData.labels.push(this.months[doc.data().month - 1]);
+        this.chartData.labels.push(this.months[doc.data().month - 1] + ' - ' + doc.data().year);
         this.chartData.labels = [...new Set(this.chartData.labels)];
       });
       const groupByMonth = this.sectionDetails.reduce((acc, item) => {
@@ -1078,7 +1078,7 @@ var componentNormalizer = __webpack_require__(18);
 
 var component = Object(componentNormalizer["a" /* default */])(
   pages_graph_monthvue_type_script_lang_js_,
-  graph_monthvue_type_template_id_55b170f7_render,
+  graph_monthvue_type_template_id_c99aebc8_render,
   staticRenderFns,
   false,
   null,
