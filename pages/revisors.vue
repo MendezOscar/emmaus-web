@@ -93,28 +93,6 @@
                       <v-col cols="6" md="3">
                         <v-text-field label="Teléfono (sin guiones)" v-model="phone" required></v-text-field>
                       </v-col>
-
-                      <v-col cols="12" md="3">
-                        <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
-                          transition="scale-transition" offset-y min-width="auto">
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field v-model="date" label="Seleccione su fecha de nacimiento"
-                              prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-text-field>
-                          </template>
-                          <v-date-picker v-model="date" no-title scrollable>
-                            <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="menu = false">
-                              Cancel
-                            </v-btn>
-                            <v-btn text color="primary" @click="$refs.menu.save(date)">
-                              OK
-                            </v-btn>
-                          </v-date-picker>
-                        </v-menu>
-                      </v-col>
-                      <v-col cols="12" md="3">
-                        <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
-                      </v-col>
                       <v-col cols="12" md="3">
                         <v-combobox v-model="churchName" :items="churchesNames"
                           label="Seleccione la sala evangélica"></v-combobox>
@@ -338,6 +316,10 @@ export default {
     },
 
     async save() {
+      if (this.name === "" || this.location === "" || this.phone === "" || this.churchName === "") {
+        alert("Por favor, complete los campos requeridos (Nombre, Ubicación, Teléfono, Iglesia).");
+        return;
+      }
       if (this.saveMode) {
         var idRev = this.firestoreAutoId()
         await setDoc(doc(db, "revisors", idRev), {
@@ -346,10 +328,8 @@ export default {
           location: this.location,
           email: this.email,
           phone: this.phone,
-          dateOfBirth: this.date,
           churchName: this.churchName.split("-")[0],
           department: this.churchName.split("-")[1],
-          dni: this.dni
         });
       }
       else {
@@ -359,10 +339,8 @@ export default {
           location: this.location,
           email: this.email,
           phone: this.phone,
-          dateOfBirth: this.date,
           churchName: this.churchName.split("-")[0],
           department: this.churchName.split("-")[1],
-          dni: this.dni,
         });
       }
       this.clear();

@@ -98,7 +98,7 @@
                   </v-container>
                   <v-container>
                     <v-row>
-                      <v-col cols="6" md="2">
+                      <v-col cols="6" md="4">
                         <v-text-field label="Teléfono (sin guiones)" v-model="phone" required></v-text-field>
                       </v-col>
 
@@ -120,21 +120,19 @@
                           </v-date-picker>
                         </v-menu>
                       </v-col>
+                       <v-col cols="12" md="4">
+                        <v-combobox v-model="churchName" :items="churchesNames"
+                          label="Seleccione la sala evangélica"></v-combobox>
+                      </v-col>
                     </v-row>
                   </v-container>
                   <v-container>
                     <v-row>
-                      <v-col cols="12" md="4">
-                        <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
-                      </v-col>
-                      <v-col cols="12" md="4">
-                        <v-combobox v-model="churchName" :items="churchesNames"
-                          label="Seleccione la sala evangélica"></v-combobox>
-                      </v-col>
 
-                      <v-col cols="12" md="4">
+
+                      <!-- <v-col cols="12" md="4">
                         <v-combobox v-model="currentCourse" :items="coursesName" label="Cursos"></v-combobox>
-                      </v-col>
+                      </v-col> -->
                     </v-row>
                   </v-container>
                 </v-card-text>

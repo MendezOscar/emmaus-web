@@ -2,21 +2,25 @@
   <v-row>
     <v-col class="text-center">
       <img width="250" height="300" src="/emmaus.png" alt="Vuetify.js" class="mb-5">
-      <v-card-title class="text-h7 text-md-h5 text-lg-h5">Registro</v-card-title>
+      <v-card-title class="text-h7 text-md-h5 text-lg-h5">Registro de estudiante</v-card-title>
 
       <v-form>
         <v-container>
           <v-row>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field label="Nombre completo" v-model="name" required></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field label="Dirección" v-model="location" required></v-text-field>
             </v-col>
 
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-text-field label="Correo" v-model="email" :rules="emailRules" required></v-text-field>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-combobox v-model="churchName" :items="churchesNames"
+                label="Seleccione la sala evangélica"></v-combobox>
             </v-col>
           </v-row>
         </v-container>
@@ -25,6 +29,7 @@
             <v-col cols="12" md="4">
               <v-text-field label="Teléfono (sin guiones)" v-model="phone" required></v-text-field>
             </v-col>
+
 
             <v-col cols="12" md="4">
               <v-menu ref="menu" v-model="menu" :close-on-content-click="false" :return-value.sync="date"
@@ -45,20 +50,8 @@
               </v-menu>
             </v-col>
             <v-col cols="12" md="4">
-              <v-text-field label="Identidad (sin guiones)" v-model="dni" required></v-text-field>
-            </v-col>
-          </v-row>
-        </v-container>
-        <v-container>
-          <v-row>
-            <v-col cols="12" md="4">
-              <v-combobox v-model="churchName" :items="churchesNames" label="Seleccione la sala evangélica"></v-combobox>
-            </v-col>
-
-            <v-col cols="12" md="4">
               <v-text-field label="Codigo" v-model="code" required></v-text-field>
             </v-col>
-
           </v-row>
         </v-container>
         <v-btn class="mr-4 mt-10" @click="register()">
@@ -177,7 +170,7 @@ export default {
     async register() {
       if (!this.name || !this.location || !this.churchName || !this.code) {
         this.snackbar = true;
-        this.text = 'Por favor, complete todos los campos requeridos.';
+        this.text = 'Por favor, complete los campos requeridos (Nombre, codigo, iglesia, ubicacion).';
         return;
       }
       var studentId = this.firestoreAutoId();
@@ -187,7 +180,6 @@ export default {
         email: this.email,
         phone: this.phone,
         dateOfBirth: this.date,
-        dni: this.dni,
         currentCourse: '',
         id: studentId,
         churchName: this.churchName.split("-")[0],
@@ -225,7 +217,6 @@ export default {
       await setDoc(doc(db, "users", studentId), {
         displayName: this.name,
         email: this.email,
-        dni: this.dni,
         phoneNumber: this.phone,
         userType: "Estudiante"
       });
@@ -241,7 +232,6 @@ export default {
       this.dateOfBirth = "";
       this.churchDones = "";
       this.church = "";
-      this.dni = "";
       this.code = "";
     },
   },
