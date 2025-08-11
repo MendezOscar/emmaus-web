@@ -171,6 +171,8 @@ export default {
       querySnapshot.forEach((doc) => {
         this.churches.push(doc.data());
       });
+      this.churches = this.churches.sort((a, b) => a.id.localeCompare(b.id));
+      this.churchId = this.churches[this.churches.length - 1].id;
     },
     deleteItem(item) {
       this.church = item;
@@ -204,6 +206,10 @@ export default {
     async save() {
       if (this.churchId === '' || this.churchName === '' || this.department === '') {
         alert("Por favor, complete todos los campos.");
+        return;
+      }
+      if (this.churches.some(church => church.id === this.churchId)) {
+        alert("La iglesia ya existe, usar otro ID.");
         return;
       }
       if (this.saveMode) {

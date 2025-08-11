@@ -92,6 +92,7 @@ import {
 export default {
   mounted() {
     this.getChurches();
+    this.getStudents();
   },
   data() {
     return {
@@ -147,6 +148,8 @@ export default {
         "Viudo"
       ],
       churchName: '',
+      students: [],
+      studentsOrdersByCode: [],
       churches: [],
       churchesNames: [],
       emailRules: [
@@ -156,6 +159,17 @@ export default {
     }
   },
   methods: {
+
+    async getStudents() {
+      this.students = [];
+      const querySnapshot = await getDocs(collection(db, "students"));
+      querySnapshot.forEach((doc) => {
+        this.students.push(doc.data());
+      });
+
+      this.studentsOrdersByCode = this.students.sort((a, b) => a.code.localeCompare(b.code));
+      this.code = this.studentsOrdersByCode[this.studentsOrdersByCode.length - 1].code;
+    },
     firestoreAutoId() {
       const CHARS =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -173,6 +187,13 @@ export default {
         this.text = 'Por favor, complete los campos requeridos (Nombre, codigo, iglesia, ubicacion).';
         return;
       }
+
+      if (this.studentsOrdersByCode.some(student => student.code === this.code || student.phoneNumber === this.phone)) {
+        this.snackbar = true;
+        this.text = 'El código ya está en uso, por favor ingrese otro código.';
+        return;
+      }
+
       var studentId = this.firestoreAutoId();
       await setDoc(doc(db, "students", studentId), {
         name: this.name,
@@ -197,7 +218,6 @@ export default {
       querySnapshot.forEach((doc) => {
         this.churches.push(doc.data());
         this.churchesNames.push(doc.data().church + "-" + doc.data().department);
-
       });
     },
     async createUser() {
