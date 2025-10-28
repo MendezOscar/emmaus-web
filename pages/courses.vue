@@ -135,6 +135,8 @@ import { collection, getDocs, setDoc, doc, deleteDoc, updateDoc } from "firebase
 
 export default {
   mounted() {
+    this.getLeves();
+    this.getModules();
   },
   data: () => ({
     saveMode: true,
@@ -211,8 +213,8 @@ export default {
     async onChangeModules() {
       this.modulesNames = [];
       this.modules.forEach((item) => {
-        if (item.levelId == this.level) {
-          this.modulesNames.push(item.id);
+        if (item.levelId == this.level.split("-")[0]) {
+          this.modulesNames.push(item.id +"-" + item.module);
         }
       });
     },
@@ -220,14 +222,14 @@ export default {
       const querySnapshot = await getDocs(collection(db, "levels"));
       querySnapshot.forEach((doc) => {
         this.levels.push(doc.data());
-        this.levelsName.push(doc.data().id);
+        this.levelsName.push(doc.data().id +"-" + doc.data().level);
       });
     },
     async getModules() {
       const querySnapshot = await getDocs(collection(db, "modules"));
       querySnapshot.forEach((doc) => {
         this.modules.push(doc.data());
-        this.modulesNames.push(doc.data().id);
+        this.modulesNames.push(doc.data().id +"-" + doc.data().module);
       });
     },
     deleteItem(item) {
@@ -250,13 +252,16 @@ export default {
     },
 
     editItem(item) {
+      console.log(item);
       this.dialog = true;
       this.saveMode = false;
-      this.course = item.name;
-      this.moduleId = item.module;
-      this.levelId = item.level
+      this.id = item.id;
+      this.name = item.course;
+      this.code = item.code;
       this.sequence = item.sequence
       this.description = item.description
+      this.level = item.levelId +"-"+ item.levelName;
+      this.module = item.moduleId +"-"+ item.moduleName;
     },
 
     add() {
@@ -273,8 +278,10 @@ export default {
       if (this.saveMode) {
         await setDoc(doc(db, "courses", this.id), {
           course: this.name,
-          moduleId: this.module,
-          levelId: this.level,
+          moduleId: this.module.split("-")[0],
+          moduleName: this.module.split("-")[1],
+          levelId: this.level.split("-")[0],
+          levelName: this.level.split("-")[1],
           sequence: this.sequence,
           description: this.description
         });
@@ -282,8 +289,10 @@ export default {
         const docRef = doc(db, "courses", this.id);
         await updateDoc(docRef, {
           course: this.name,
-          moduleId: moduleName,
-          levelId: levelName,
+          moduleId: this.module.split("-")[0],
+          moduleName: this.module.split("-")[1],
+          levelId: this.level.split("-")[0],
+          levelName: this.level.split("-")[1],
           sequence: this.sequence,
           description: this.description
         });
